@@ -43,7 +43,8 @@
 //
 // Included Files
 //
-#include "driverlib_cm.h"
+
+#include "clocktree.h" // Line added to provide compatibility with sysconfig
 
 //*****************************************************************************
 //
@@ -52,7 +53,11 @@
 //
 //*****************************************************************************
 
-#define CM_CLK_FREQ       125000000U
+
+#define CM_CLK_FREQ (DEVICE_AUXCLK_FREQ) // Line edited to provide compatibility
+                                         // with sysconfig
+
+#include "driverlib_cm.h"
 
 //*****************************************************************************
 //

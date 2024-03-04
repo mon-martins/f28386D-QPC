@@ -8,8 +8,8 @@
 #ifndef BSP_INIT_INCLUDE_CM_CONFIG_H_
 #define BSP_INIT_INCLUDE_CM_CONFIG_H_
 
-#include "macros_cpu1.h"
 #include "cm.h"
+#include "board.h"
 
 void CortexM_Init(void);
 

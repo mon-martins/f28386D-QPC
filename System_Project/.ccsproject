@@ -10,4 +10,5 @@
 	<createSlaveProjects value=""/>
 	<templateProperties value="id=com.ti.common.project.core.emptySystemProjectTemplate"/>
 	<filesToOpen value="system.xml"/>
+	<isTargetManual value="false"/>
 </projectOptions>
