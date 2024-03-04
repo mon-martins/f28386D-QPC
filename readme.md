@@ -1,0 +1,4 @@
+## Project Blinky LED
+
+# SDK: C2000WARE 05.00.00.00
+# SYSCONFIG: V 1.19.0

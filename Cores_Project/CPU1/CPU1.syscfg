@@ -1,0 +1,82 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --device "F2838x" --package "176pin" --part "F2838x_176pin" --context "CPU1" --product "C2000WARE@5.00.00.00"
+ * @versions {"tool":"1.19.0+3426"}
+ */
+
+/**
+ * Import the modules used in this configuration.
+ */
+const device_support = scripting.addModule("/driverlib/device_support.js");
+const gpio           = scripting.addModule("/driverlib/gpio.js", {}, false);
+const gpio1          = gpio.addInstance();
+const gpio2          = gpio.addInstance();
+const gpio3          = gpio.addInstance();
+const ipc            = scripting.addModule("/driverlib/ipc.js");
+const memcfg         = scripting.addModule("/driverlib/memcfg.js");
+const sysctl         = scripting.addModule("/driverlib/sysctl.js");
+const CMD            = scripting.addModule("/utilities/cmd_tool/cmd_syscfg/source/CMD");
+const CMD1           = CMD.addInstance();
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+const multiplier1         = system.clockTree["AUX_IMULT"];
+multiplier1.multiplyValue = 50;
+
+const multiplier2         = system.clockTree["PLL_IMULT"];
+multiplier2.multiplyValue = 40;
+
+const mux18       = system.clockTree["XTAL_OR_X1"];
+mux18.inputSelect = "XTAL";
+
+const pinFunction3     = system.clockTree["XTAL"];
+pinFunction3.XTAL_Freq = 20;
+
+gpio1.$name           = "LED1";
+gpio1.direction       = "GPIO_DIR_MODE_OUT";
+gpio1.gpioPin.$assign = "GPIO8";
+
+gpio2.$name           = "LED2";
+gpio2.direction       = "GPIO_DIR_MODE_OUT";
+gpio2.controllerCore  = "GPIO_CORE_CPU2";
+gpio2.gpioPin.$assign = "GPIO9";
+
+gpio3.$name           = "LED3";
+gpio3.direction       = "GPIO_DIR_MODE_OUT";
+gpio3.controllerCore  = "GPIO_CORE_CM";
+gpio3.gpioPin.$assign = "GPIO99";
+
+ipc.ipcRegisterFlag = ["IPC_FLAG31"];
+ipc.flagHandler31   = "IPC_SYNC";
+
+CMD.activateCMD = true;
+CMD.activeCMD   = "CMD_Config";
+
+CMD1.sectionAlignEnable_ramfunc          = true;
+CMD1.sectionAlignEnable_text             = true;
+CMD1.sectionAlignEnable_binit            = true;
+CMD1.sectionAlignEnable_cinit            = true;
+CMD1.sectionAlignEnable_switch           = true;
+CMD1.sectionAlignEnable_init_array       = true;
+CMD1.sectionAlignEnable_const            = true;
+CMD1.sectionAlignEnable_ovly             = true;
+CMD1.sectionMemory_codestart             = "0x080000";
+CMD1.sectionMemory_stack                 = ["RAMM1"];
+CMD1.sectionMemory_bss                   = ["RAMLS5"];
+CMD1.sectionMemory_data                  = ["RAMLS5"];
+CMD1.sectionMemory_sysmem                = ["RAMLS5"];
+CMD1.$name                               = "CMD_Config";
+CMD1.sectionRun_text                     = ["RAMLS1","RAMLS2","RAMLS3","RAMLS4"];
+CMD1.sectionMemory_ramfunc               = ["FLASH3"];
+CMD1.sectionMemory_text                  = ["FLASH1","FLASH2","FLASH3","FLASH4"];
+CMD1.sectionMemory_binit                 = ["FLASH4"];
+CMD1.sectionMemory_cinit                 = ["FLASH4"];
+CMD1.sectionMemory_switch                = ["FLASH1"];
+CMD1.sectionMemory_init_array            = ["FLASH1"];
+CMD1.sectionMemory_const                 = ["FLASH5"];
+CMD1.sectionMemory_ovly                  = ["FLASH1"];
+CMD1.sectionRunFromDifferentAddr_ramfunc = true;
+CMD1.sectionRun_ramfunc                  = ["RAMLS0"];
+CMD1.sectionBinit_ramfunc                = false;
