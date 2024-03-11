@@ -37,6 +37,15 @@ static void nmiISR(void);
 static void faultISR(void);
 static void defaultISR(void);
 
+//*****************************************************************************
+//
+// External declarations for the interrupt handlers used by the application.
+//
+//*****************************************************************************
+extern void xPortPendSVHandler(void);
+extern void vPortSVCHandler(void);
+extern void xPortSysTickHandler(void);
+
 //
 // External declaration for the reset handler that is to be called when the
 // processor is started     
@@ -81,11 +90,11 @@ void (* const vectorTableRAM[])(void) =
     0,                                      /* Reserved                  */
     0,                                      /* Reserved                  */
     0,                                      /* Reserved                  */
-    defaultISR,                        /* SVCall handler            */
+    vPortSVCHandler,                        /* SVCall handler            */
     defaultISR,                             /* Debug monitor handler     */
     0,                                      /* Reserved                  */
-    defaultISR,                     /* The PendSV handler        */
-    defaultISR,                    /* The SysTick handler       */
+    xPortPendSVHandler,                     /* The PendSV handler        */
+    xPortSysTickHandler,                    /* The SysTick handler       */
     defaultISR,                             /* MCANSS_0 handler          */
     defaultISR,                             /* MCANSS_1 handler          */
     defaultISR,                             /* MCANSS_WAKE_AND_TS_PLS ISR*/

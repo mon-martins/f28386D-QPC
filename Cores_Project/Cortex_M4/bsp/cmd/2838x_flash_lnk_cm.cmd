@@ -74,6 +74,13 @@ SECTIONS
                      RUN_SIZE(RamfuncsRunSize),
                      RUN_END(RamfuncsRunEnd),
                      ALIGN(16)
+
+	//
+	// My Sections
+	//
+
+	freertos_stack_mem { *(.freertosStaticStack) }    >  SxRAM
+	freertos_heap_mem { *(.freertosHeap) }    		  >  SxRAM
 }
 
 /*

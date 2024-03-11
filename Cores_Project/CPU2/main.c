@@ -1,8 +1,12 @@
-#include "C2000_Config.h"
-
 /**
  * main.c
  */
+
+#include "C2000_Config.h"
+#include "FreeRTOS.h"
+
+void led_blink(void *pvParams);
+
 void main(void)
 {
     C2000_Init();
@@ -10,28 +14,22 @@ void main(void)
     EINT;
     ERTM;
 
-    for(;;)
-    {
-        //
-        // Turn on LED
-        //
-        GPIO_writePin(LED2, 0);
+//    CLA_forceTasks(myCLA0_BASE, CLA_TASKFLAG_1);
 
-        //
-        // Delay for a bit.
-        //
-        DEVICE_DELAY_US(500000);
+    xTaskCreate(&led_blink,"LED_BLINK",configMINIMAL_STACK_SIZE,NULL,2,NULL);
 
-        //
-        // Turn off LED
-        //
-        GPIO_writePin(LED2, 1);
-
-        //
-        // Delay for a bit.
-        //
-        DEVICE_DELAY_US(500000);
-    }
+    FreeRTOS_init();
 
     while(1);
+}
+
+#define portTICK_RATE_MS portTICK_PERIOD_MS
+
+void led_blink(void *pvParams) {
+    while (1) {
+        GPIO_writePin(LED2, 1);
+        vTaskDelay(1000/portTICK_RATE_MS);
+        GPIO_writePin(LED2, 0);
+        vTaskDelay(1000/portTICK_RATE_MS);
+    }
 }

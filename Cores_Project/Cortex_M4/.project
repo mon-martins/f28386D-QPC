@@ -26,6 +26,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>middleware/FreeRTOS</name>
+			<type>2</type>
+			<locationURI>C2000WARE_ROOT/kernel/FreeRTOS/Source</locationURI>
+		</link>
+		<link>
 			<name>middleware/driverlib_cm</name>
 			<type>2</type>
 			<locationURI>C2000WARE_ROOT/driverlib/f2838x/driverlib_cm</locationURI>

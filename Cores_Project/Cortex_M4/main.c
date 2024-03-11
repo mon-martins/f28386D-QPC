@@ -3,39 +3,31 @@
 //
 
 #include "CM_Config.h"
+#include "freertos_support.h"
 
 /**
  * main.c
  */
+
+void led_blink(void *pvParams);
 
 void main(void)
 {
 
     CortexM_Init();
 
-    for(;;)
-    {
-        //
-        // Turn on LED
-        //
-        GPIO_writePin(LED3, 0);
+    xTaskCreate(&led_blink,"LED_BLINK",configMINIMAL_STACK_SIZE,NULL,2,NULL);
 
-        //
-        // Delay for a bit.
-        //
-        DEVICE_DELAY_US(500000);
-
-        //
-        // Turn off LED
-        //
-        GPIO_writePin(LED3, 1);
-
-        //
-        // Delay for a bit.
-        //
-        DEVICE_DELAY_US(500000);
-    }
-
-    while(1);
+    FreeRTOS_init();
 
 }
+
+void led_blink(void *pvParams) {
+    while (1) {
+        GPIO_writePin(LED3, 1);
+        vTaskDelay(250/portTICK_RATE_MS);
+        GPIO_writePin(LED3, 0);
+        vTaskDelay(250/portTICK_RATE_MS);
+    }
+}
+

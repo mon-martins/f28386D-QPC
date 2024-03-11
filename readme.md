@@ -1,6 +1,6 @@
-# Project Blinky LED
+# Project Blinky LED with FreeRTOS
 
-A simple blinky project, trying maximize the use of the sysconfig tool.
+A simple blinky project, trying maximize the use of the sysconfig tool and using FreeRTOS provided by C2000Ware 05.00.00.00.
 
 In this project each CPU blinky it's own LED.
 
