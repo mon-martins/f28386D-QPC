@@ -71,6 +71,9 @@ FREERTOS1.$name                    = "myFREERTOS0";
 FREERTOS1.CPU_CLOCK_HZ             = 200000000;
 FREERTOS1.CHECK_FOR_STACK_OVERFLOW = true;
 FREERTOS1.USE_MALLOC_FAILED_HOOK   = true;
+FREERTOS1.MAX_PRIORITIES           = 32;
+FREERTOS1.USE_TICK_HOOK            = true;
+FREERTOS1.MINIMAL_STACK_SIZE       = 256;
 
 CMD.activateCMD = true;
 CMD.activeCMD   = "CMD_Config";

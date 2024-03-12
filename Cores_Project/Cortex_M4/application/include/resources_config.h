@@ -12,10 +12,10 @@
 // User Assert use this to custom your assert before system stop
 // if defined, it's required define the "user_assert()" function
 
-//#define USER_ASSERT
+#define USER_ASSERT 0
 
 
-#ifdef USER_ASSERT
+#if USER_ASSERT
     void user_assert(unsigned int assert_source, unsigned int assert_number);
 #endif
 

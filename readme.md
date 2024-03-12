@@ -1,8 +1,8 @@
-# Project Blinky LED with FreeRTOS
+# Project Blinky LED with FreeRTOS and QPC
 
-A simple blinky project, trying maximize the use of the sysconfig tool and using FreeRTOS provided by C2000Ware 05.00.00.00.
+A simple blinky project, trying maximize the use of the sysconfig tool, using FreeRTOS provided by C2000Ware 05.00.00.00 and QPC from QuantumLeaps.
 
-In this project each CPU blinky it's own LED.
+In this project each Core blinky it's own LED.
 
 ## Getting Started
 
@@ -30,5 +30,7 @@ set or delete the _FLASH symbol on Prject's proprieties.
 
 
 ## Tools:
+QM: 6.1.1
+QPC framework: 7.3.3
 SDK: C2000WARE 05.00.00.00
 SYSCONFIG: V1.19.0

@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model version="6.1.1" links="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.state-machine.com/qm/qm.xsd">
+ <documentation>About this example:
+-------------------
+Simple &quot;Blinky&quot; console application for workstations (Windows, Linux, MacOS)
+(see &quot;QM Tutorial&quot; at: https://www.state-machine.com/qm/gs_tut.html)
+
+This example demonstrates:
+- Active object (Blinky) with state machine
+- Board Support Package abstraction for portability
+- BSP implementation for desktop OS (Windows, Linux, MacOS)
+- Platform-independent main() function
+- Makefile to build the generated code on desktop OS (Windows, Linux, MacOS)
+- Customized tools for building the generated code directly from QM
+
+Building the example:
+---------------------
+To build this example, you will need the QP/C framework installed on your computer and the GNU-GCC compiler. Both of them will be available if you install the QP-bundle from:
+
+https://www.state-machine.com/#Downloads
+
+Running the example:
+--------------------
+This example is a simple console application, which you can run from a terminal.
+
+For more QM examples for QP/C see:
+https://www.state-machine.com/qpc/exa.html</documentation>
+ <!--${qpc}-->
+ <framework name="qpc"/>
+ <!--${Shared}-->
+ <package name="Shared" stereotype="0x00">
+  <!--${Shared::ao_blinky}-->
+  <attribute name="ao_blinky" type="QActive * const" visibility="0x00" properties="0x00">
+   <code>= &amp;blinky_inst.super;</code>
+  </attribute>
+  <!--${Shared::blinky_ctor}-->
+  <operation name="blinky_ctor" type="void" visibility="0x00" properties="0x01">
+   <documentation>The Blinky &quot;constructor&quot; is provided outside of the Blinky class, so that it can be used independently from the class. This is part of the &quot;opaque pointer&quot; design idiom.</documentation>
+   <code>blinky * const me = &amp;blinky_inst;
+QActive_ctor(&amp;me-&gt;super, Q_STATE_CAST(&amp;blinky_initial));
+QTimeEvt_ctorX(&amp;me-&gt;time_evt, &amp;me-&gt;super, TIMEOUT_SIG, 0U);</code>
+  </operation>
+ </package>
+ <!--${AOs}-->
+ <package name="AOs" stereotype="0x02">
+  <!--${AOs::blinky}-->
+  <class name="blinky" superclass="qpc::QActive">
+   <!--${AOs::blinky::time_evt}-->
+   <attribute name="time_evt" type="QTimeEvt" visibility="0x02" properties="0x00"/>
+   <!--${AOs::blinky::inst}-->
+   <attribute name="inst" type="blinky" visibility="0x00" properties="0x01"/>
+   <!--${AOs::blinky::SM}-->
+   <statechart properties="0x03">
+    <documentation>Blinky state machine</documentation>
+    <!--${AOs::blinky::SM::initial}-->
+    <initial target="../1">
+     <action>#ifdef CM
+QTimeEvt_armX(&amp;me-&gt;time_evt,500, 500);
+#else
+QTimeEvt_armX(&amp;me-&gt;time_evt,501, 501);
+#endif</action>
+     <initial_glyph conn="2,3,5,1,20,4,-4">
+      <action box="0,-2,6,2"/>
+     </initial_glyph>
+    </initial>
+    <!--${AOs::blinky::SM::off}-->
+    <state name="off">
+     <entry>blinky_led_off();</entry>
+     <!--${AOs::blinky::SM::off::TIMEOUT}-->
+     <tran trig="TIMEOUT" target="../../2">
+      <tran_glyph conn="2,13,3,1,18,6,-2">
+       <action box="0,-2,8,2"/>
+      </tran_glyph>
+     </tran>
+     <state_glyph node="2,5,16,10">
+      <entry box="1,2,12,4"/>
+     </state_glyph>
+    </state>
+    <!--${AOs::blinky::SM::on}-->
+    <state name="on">
+     <entry>blinky_led_on();</entry>
+     <!--${AOs::blinky::SM::on::TIMEOUT}-->
+     <tran trig="TIMEOUT" target="../../1">
+      <tran_glyph conn="2,25,3,1,20,-15,-4">
+       <action box="0,-2,8,2"/>
+      </tran_glyph>
+     </tran>
+     <state_glyph node="2,17,16,10">
+      <entry box="1,2,12,4"/>
+     </state_glyph>
+    </state>
+    <state_diagram size="24,29"/>
+   </statechart>
+  </class>
+ </package>
+ <!--${Signals}-->
+ <package name="Signals" stereotype="0x00">
+  <!--${Signals::signals}-->
+  <attribute name="signals" type="enum" visibility="0x04" properties="0x00">
+   <code>{
+    // Publish Subscribe Signals
+    TIMEOUT_SIG = Q_USER_SIG,
+    // - Only PRIVATE
+
+    MAX_PUB_SIG,
+
+    INIT_SINGLE_TARGET_SIG = 32,
+    // - GLOBAL
+
+    // - lOCAL
+
+    // - PRIVATE
+
+    MAX_SIG
+};</code>
+  </attribute>
+ </package>
+ <!--${.}-->
+ <directory name=".">
+  <!--${.::Cores_Project}-->
+  <directory name="Cores_Project">
+   <!--${.::Cores_Project::CPU1}-->
+   <directory name="CPU1">
+    <!--${.::Cores_Project::CPU1::state_machine}-->
+    <directory name="state_machine">
+     <!--${.::Cores_Project::CPU1::state_machine::qm_files}-->
+     <directory name="qm_files">
+      <!--${.::Cores_Project::CPU1::state_machine::qm_files::ao_blinky}-->
+      <directory name="ao_blinky">
+       <!--${.::Cores_Project::CPU1::state_machine::qm_files::ao_blinky::blinky.c}-->
+       <file name="blinky.c">
+        <text>#include &quot;./blinky.h&quot;
+
+$define${AOs::blinky}</text>
+       </file>
+       <!--${.::Cores_Project::CPU1::state_machine::qm_files::ao_blinky::blinky.h}-->
+       <file name="blinky.h">
+        <text>#ifndef BLINKY_H_
+#define BLINKY_H_
+
+#include &quot;qpc.h&quot;
+#include &quot;signals.h&quot;
+#include &quot;blinky_sup/blinky_app.h&quot;
+
+$declare${AOs::blinky}
+
+#endif // BLINKY_H_</text>
+       </file>
+      </directory>
+      <!--${.::Cores_Project::CPU1::state_machine::qm_files::main_qm.h}-->
+      <file name="main_qm.h">
+       <text>#ifndef MAIN_QM_H_
+#define MAIN_QM_H_
+
+#include &quot;signals.h&quot;
+
+// include the AOs
+
+#include &quot;ao_blinky/blinky.h&quot;
+
+$declare${Shared}
+
+#endif // MAIN_QM_H_</text>
+      </file>
+      <!--${.::Cores_Project::CPU1::state_machine::qm_files::main_qm.c}-->
+      <file name="main_qm.c">
+       <text>#include &quot;main_qm.h&quot;
+
+$define${Shared}</text>
+      </file>
+      <!--${.::Cores_Project::CPU1::state_machine::qm_files::signals.h}-->
+      <file name="signals.h">
+       <text>#ifndef SIGNALS_H_
+#define SIGNALS_H_
+
+#include &quot;qpc.h&quot;
+
+$declare${Signals}
+
+#endif // SIGNALS_H_</text>
+      </file>
+     </directory>
+     <!--${.::Cores_Project::CPU1::state_machine::qm_packages}-->
+     <directory name="qm_packages"/>
+    </directory>
+   </directory>
+   <!--${.::Cores_Project::CPU2}-->
+   <directory name="CPU2">
+    <!--${.::Cores_Project::CPU2::state_machine}-->
+    <directory name="state_machine">
+     <!--${.::Cores_Project::CPU2::state_machine::qm_files}-->
+     <directory name="qm_files">
+      <!--${.::Cores_Project::CPU2::state_machine::qm_files::ao_blinky}-->
+      <directory name="ao_blinky">
+       <!--${.::Cores_Project::CPU2::state_machine::qm_files::ao_blinky::blinky.c}-->
+       <file name="blinky.c">
+        <text>#include &quot;./blinky.h&quot;
+
+$define${AOs::blinky}</text>
+       </file>
+       <!--${.::Cores_Project::CPU2::state_machine::qm_files::ao_blinky::blinky.h}-->
+       <file name="blinky.h">
+        <text>#ifndef BLINKY_H_
+#define BLINKY_H_
+
+#include &quot;qpc.h&quot;
+#include &quot;signals.h&quot;
+#include &quot;blinky_sup/blinky_app.h&quot;
+
+$declare${AOs::blinky}
+
+#endif // BLINKY_H_</text>
+       </file>
+      </directory>
+      <!--${.::Cores_Project::CPU2::state_machine::qm_files::main_qm.h}-->
+      <file name="main_qm.h">
+       <text>#ifndef MAIN_QM_H_
+#define MAIN_QM_H_
+
+#include &quot;signals.h&quot;
+
+// include the AOs
+
+#include &quot;ao_blinky/blinky.h&quot;
+
+$declare${Shared}
+
+#endif // MAIN_QM_H_</text>
+      </file>
+      <!--${.::Cores_Project::CPU2::state_machine::qm_files::main_qm.c}-->
+      <file name="main_qm.c">
+       <text>#include &quot;main_qm.h&quot;
+
+$define${Shared}</text>
+      </file>
+      <!--${.::Cores_Project::CPU2::state_machine::qm_files::signals.h}-->
+      <file name="signals.h">
+       <text>#ifndef SIGNALS_H_
+#define SIGNALS_H_
+
+#include &quot;qpc.h&quot;
+
+$declare${Signals}
+
+#endif // SIGNALS_H_</text>
+      </file>
+     </directory>
+     <!--${.::Cores_Project::CPU2::state_machine::qm_packages}-->
+     <directory name="qm_packages"/>
+    </directory>
+   </directory>
+   <!--${.::Cores_Project::Cortex_M4}-->
+   <directory name="Cortex_M4">
+    <!--${.::Cores_Project::Cortex_M4::state_machine}-->
+    <directory name="state_machine">
+     <!--${.::Cores_Project::Cortex_M4::state_machine::qm_files}-->
+     <directory name="qm_files">
+      <!--${.::Cores_Project::Cortex_M4::state_machine::qm_files::ao_blinky}-->
+      <directory name="ao_blinky">
+       <!--${.::Cores_Project::Cortex_M4::state_machine::qm_files::ao_blinky::blinky.c}-->
+       <file name="blinky.c">
+        <text>#include &quot;./blinky.h&quot;
+
+$define${AOs::blinky}</text>
+       </file>
+       <!--${.::Cores_Project::Cortex_M4::state_machine::qm_files::ao_blinky::blinky.h}-->
+       <file name="blinky.h">
+        <text>#ifndef BLINKY_H_
+#define BLINKY_H_
+
+#include &quot;qpc.h&quot;
+#include &quot;signals.h&quot;
+#include &quot;blinky_sup/blinky_app.h&quot;
+
+$declare${AOs::blinky}
+
+#endif // BLINKY_H_</text>
+       </file>
+      </directory>
+      <!--${.::Cores_Project::Cortex_M4::state_machine::qm_files::main_qm.h}-->
+      <file name="main_qm.h">
+       <text>#ifndef MAIN_QM_H_
+#define MAIN_QM_H_
+
+#include &quot;signals.h&quot;
+
+// include the AOs
+
+#include &quot;ao_blinky/blinky.h&quot;
+
+$declare${Shared}
+
+#endif // MAIN_QM_H_</text>
+      </file>
+      <!--${.::Cores_Project::Cortex_M4::state_machine::qm_files::main_qm.c}-->
+      <file name="main_qm.c">
+       <text>#include &quot;main_qm.h&quot;
+
+$define${Shared}</text>
+      </file>
+      <!--${.::Cores_Project::Cortex_M4::state_machine::qm_files::signals.h}-->
+      <file name="signals.h">
+       <text>#ifndef SIGNALS_H_
+#define SIGNALS_H_
+
+#include &quot;qpc.h&quot;
+
+$declare${Signals}
+
+#endif // SIGNALS_H_</text>
+      </file>
+     </directory>
+     <!--${.::Cores_Project::Cortex_M4::state_machine::qm_packages}-->
+     <directory name="qm_packages"/>
+    </directory>
+   </directory>
+  </directory>
+ </directory>
+</model>

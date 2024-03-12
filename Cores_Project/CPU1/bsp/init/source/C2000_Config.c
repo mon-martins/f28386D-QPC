@@ -44,7 +44,11 @@ void C2000_Init(void){
     //
     Interrupt_initVectorTable();
 
+#if USER_BOARD_INIT
+    user_board_init();
+#else
     Board_init();
+#endif
 
     C2000Ware_libraries_init();
 

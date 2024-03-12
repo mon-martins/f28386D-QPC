@@ -10,7 +10,7 @@
 #include "c2000_freertos.h"
 
 void system_assert(unsigned int assert_source, unsigned int assert_number){
-#ifdef USER_ASSERT
+#if USER_ASSERT
     user_assert(assert_source, assert_number);
 #endif
     taskDISABLE_INTERRUPTS();

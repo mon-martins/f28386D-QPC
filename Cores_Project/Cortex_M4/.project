@@ -36,6 +36,11 @@
 			<locationURI>C2000WARE_ROOT/driverlib/f2838x/driverlib_cm</locationURI>
 		</link>
 		<link>
+			<name>middleware/qpc</name>
+			<type>2</type>
+			<locationURI>SUBMODULES_LOC/qpc</locationURI>
+		</link>
+		<link>
 			<name>libs/driverlib/Debug</name>
 			<type>2</type>
 			<locationURI>C2000WARE_ROOT/driverlib/f2838x/driverlib_cm/ccs/Debug</locationURI>
@@ -54,6 +59,10 @@
 		<variable>
 			<name>CORES_LOC</name>
 			<value>$%7BPARENT-1-PROJECT_LOC%7D</value>
+		</variable>
+		<variable>
+			<name>SUBMODULES_LOC</name>
+			<value>$%7BPARENT-1-CORES_LOC%7D/Submodules</value>
 		</variable>
 	</variableList>
 </projectDescription>

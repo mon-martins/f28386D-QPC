@@ -10,6 +10,7 @@
 
 #include "cm.h"
 #include "board.h"
+#include "resources_config.h"
 
 void CortexM_Init(void);
 

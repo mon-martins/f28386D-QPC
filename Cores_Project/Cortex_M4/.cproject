@@ -52,6 +52,12 @@
 									<listOptionValue builtIn="false" value="${C2000WARE_ROOT}/kernel/FreeRTOS/Source/portable/CCS/ARM_CM4"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/bsp/freertos/include"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/bsp/security/include"/>
+									<listOptionValue builtIn="false" value="${SUBMODULES_LOC}/qpc/include"/>
+									<listOptionValue builtIn="false" value="${SUBMODULES_LOC}/qpc/ports/freertos"/>
+									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/bsp/qpc/freertos_support/include"/>
+									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/bsp/qpc/qpc_support/include"/>
+									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/application/ao_sup"/>
+									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/state_machine/qm_files"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compilerID.DEFINE.96957261" name="Pre-define NAME (--define, -D)" superClass="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compilerID.DEFINE" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="${COM_TI_C2000WARE_SOFTWARE_PACKAGE_SYMBOLS}"/>
@@ -67,6 +73,7 @@
 								<option id="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compilerID.DIAG_WRAP.1646169655" name="Wrap diagnostic messages (--diag_wrap) [deprecated]" superClass="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compilerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compilerID.DIAG_WRAP.off" valueType="enumerated"/>
 								<option id="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compilerID.DISPLAY_ERROR_NUMBER.162839449" name="Emit diagnostic identifier numbers (--display_error_number, -pden) [deprecated]" superClass="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compilerID.DISPLAY_ERROR_NUMBER" value="true" valueType="boolean"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="true" id="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compilerID.PREINCLUDE.1486517133" name="Specify a preinclude file (--preinclude)" superClass="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compilerID.PREINCLUDE" valueType="includeFiles"/>
+								<option id="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compilerID.C_DIALECT.1233585330" name="C Dialect" superClass="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compilerID.C_DIALECT" value="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compilerID.C_DIALECT.C99" valueType="enumerated"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compiler.inputType__C_SRCS.1312543295" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compiler.inputType__C_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compiler.inputType__CPP_SRCS.232034031" name="C++ Sources" superClass="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compiler.inputType__CPP_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compiler.inputType__ASM_SRCS.21861935" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.TMS470_20.2.compiler.inputType__ASM_SRCS"/>
@@ -115,7 +122,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="middleware/FreeRTOS/portable/MemMang/heap_1.c|middleware/FreeRTOS/portable/CCS/C2000_C28x|middleware/FreeRTOS/portable/MemMang/heap_5.c|middleware/FreeRTOS/portable/MemMang/heap_3.c|middleware/FreeRTOS/portable/MemMang/heap_2.c|middleware/driverlib_cm|libs/driverlib/Release" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="middleware/qpc/ports/zephyr|middleware/qpc/ports/win32-qv|middleware/qpc/ports/win32-qutest|middleware/qpc/ports/win32|middleware/qpc/ports/uc-os2|middleware/qpc/ports/threadx|middleware/qpc/ports/risc-v|middleware/qpc/ports/qube|middleware/qpc/ports/qep-only|middleware/qpc/ports/posix-qv|middleware/qpc/ports/posix-qutest|middleware/qpc/ports/posix|middleware/qpc/ports/pic32|middleware/qpc/ports/msp430|middleware/qpc/ports/lint-plus|middleware/qpc/ports/esp-idf|middleware/qpc/ports/embos|middleware/qpc/ports/config|middleware/qpc/ports/arm-cr|middleware/qpc/ports/arm-cm|middleware/qpc/src/qf/qf_actq.c|middleware/qpc/src/qxk|middleware/qpc/src/qv|middleware/qpc/src/qs|middleware/qpc/src/qk|middleware/qpc/zephyr|middleware/qpc/test|middleware/qpc/LICENSES|middleware/qpc/examples|middleware/qpc/3rd_party|middleware/FreeRTOS/portable/MemMang/heap_1.c|middleware/FreeRTOS/portable/CCS/C2000_C28x|middleware/FreeRTOS/portable/MemMang/heap_5.c|middleware/FreeRTOS/portable/MemMang/heap_3.c|middleware/FreeRTOS/portable/MemMang/heap_2.c|middleware/driverlib_cm|libs/driverlib/Release" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

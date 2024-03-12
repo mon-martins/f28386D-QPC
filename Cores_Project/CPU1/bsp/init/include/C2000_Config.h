@@ -11,6 +11,7 @@
 #include "board.h"
 #include "c2000ware_libraries.h"
 #include "c2000_freertos.h"
+#include "resources_config.h"
 
 // Fixing DEVICE_DELAY_US missing parentheses on C2000WARE 05.00.00.00
 #undef DEVICE_DELAY_US
