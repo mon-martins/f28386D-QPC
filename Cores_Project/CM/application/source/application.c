@@ -7,8 +7,8 @@
 
 #include "application.h"
 
-static QEvt const *blinky_queue_sto[10]; /* event queue buffer for SDRecorder */
-static StackType_t  blinky_stack[(unsigned int)(configMINIMAL_STACK_SIZE)];
+static QEvt const *blinky_queue_sto[10]; /* event queue buffer for blinky */
+static StackType_t  blinky_stack[(unsigned int)(configMINIMAL_STACK_SIZE)]; /* stack for blinky */
 
 //static Evt2Bytes Evt2Bytes_EvtPool[8];
 //static Evt8Bytes Evt8Bytes_EvtPool[8];
@@ -35,9 +35,9 @@ void active_objects_init(void){
 
     // Init your AOs here
 
-    /* instantiate and start the LogSDCard active object */
+    /* instantiate and start the blinky active object */
 
-    blinky_ctor(); /* in C you must explicitly call the LogSDCard constructor */
+    blinky_ctor(); /* in C you must explicitly call the blinky constructor */
     QACTIVE_START(ao_blinky, /* active object to start */
         1U,                  /* priority of the active object */
         blinky_queue_sto,     /* event queue buffer */
