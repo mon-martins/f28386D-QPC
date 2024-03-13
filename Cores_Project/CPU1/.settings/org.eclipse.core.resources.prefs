@@ -22,6 +22,7 @@ encoding//Debug/middleware/qpc/ports/freertos/subdir_rules.mk=UTF-8
 encoding//Debug/middleware/qpc/ports/freertos/subdir_vars.mk=UTF-8
 encoding//Debug/middleware/qpc/src/qf/subdir_rules.mk=UTF-8
 encoding//Debug/middleware/qpc/src/qf/subdir_vars.mk=UTF-8
+encoding//Debug/objects.mk=UTF-8
 encoding//Debug/sources.mk=UTF-8
 encoding//Debug/state_machine/qm_files/ao_blinky/subdir_rules.mk=UTF-8
 encoding//Debug/state_machine/qm_files/ao_blinky/subdir_vars.mk=UTF-8

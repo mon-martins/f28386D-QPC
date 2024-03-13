@@ -26,6 +26,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>main_model.qm</name>
+			<type>1</type>
+			<locationURI>PARENT-1-CORES_LOC/main_model.qm</locationURI>
+		</link>
+		<link>
 			<name>middleware/driverlib</name>
 			<type>2</type>
 			<locationURI>C2000WARE_ROOT/driverlib/f2838x/driverlib</locationURI>
