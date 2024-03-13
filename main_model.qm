@@ -249,21 +249,21 @@ $declare${Signals}
      <directory name="qm_packages"/>
     </directory>
    </directory>
-   <!--${.::Cores_Project::Cortex_M4}-->
-   <directory name="Cortex_M4">
-    <!--${.::Cores_Project::Cortex_M4::state_machine}-->
+   <!--${.::Cores_Project::CM}-->
+   <directory name="CM">
+    <!--${.::Cores_Project::CM::state_machine}-->
     <directory name="state_machine">
-     <!--${.::Cores_Project::Cortex_M4::state_machine::qm_files}-->
+     <!--${.::Cores_Project::CM::state_machine::qm_files}-->
      <directory name="qm_files">
-      <!--${.::Cores_Project::Cortex_M4::state_machine::qm_files::ao_blinky}-->
+      <!--${.::Cores_Project::CM::state_machine::qm_files::ao_blinky}-->
       <directory name="ao_blinky">
-       <!--${.::Cores_Project::Cortex_M4::state_machine::qm_files::ao_blinky::blinky.c}-->
+       <!--${.::Cores_Project::CM::state_machine::qm_files::ao_blinky::blinky.c}-->
        <file name="blinky.c">
         <text>#include &quot;./blinky.h&quot;
 
 $define${AOs::blinky}</text>
        </file>
-       <!--${.::Cores_Project::Cortex_M4::state_machine::qm_files::ao_blinky::blinky.h}-->
+       <!--${.::Cores_Project::CM::state_machine::qm_files::ao_blinky::blinky.h}-->
        <file name="blinky.h">
         <text>#ifndef BLINKY_H_
 #define BLINKY_H_
@@ -277,7 +277,7 @@ $declare${AOs::blinky}
 #endif // BLINKY_H_</text>
        </file>
       </directory>
-      <!--${.::Cores_Project::Cortex_M4::state_machine::qm_files::main_qm.h}-->
+      <!--${.::Cores_Project::CM::state_machine::qm_files::main_qm.h}-->
       <file name="main_qm.h">
        <text>#ifndef MAIN_QM_H_
 #define MAIN_QM_H_
@@ -292,13 +292,13 @@ $declare${Shared}
 
 #endif // MAIN_QM_H_</text>
       </file>
-      <!--${.::Cores_Project::Cortex_M4::state_machine::qm_files::main_qm.c}-->
+      <!--${.::Cores_Project::CM::state_machine::qm_files::main_qm.c}-->
       <file name="main_qm.c">
        <text>#include &quot;main_qm.h&quot;
 
 $define${Shared}</text>
       </file>
-      <!--${.::Cores_Project::Cortex_M4::state_machine::qm_files::signals.h}-->
+      <!--${.::Cores_Project::CM::state_machine::qm_files::signals.h}-->
       <file name="signals.h">
        <text>#ifndef SIGNALS_H_
 #define SIGNALS_H_
@@ -310,7 +310,7 @@ $declare${Signals}
 #endif // SIGNALS_H_</text>
       </file>
      </directory>
-     <!--${.::Cores_Project::Cortex_M4::state_machine::qm_packages}-->
+     <!--${.::Cores_Project::CM::state_machine::qm_packages}-->
      <directory name="qm_packages"/>
     </directory>
    </directory>

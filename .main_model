@@ -9,10 +9,10 @@
   <item name="backups">0</item>
  </group>
  <group name="windows">
-  <item id="AOs::blinky::SM">0,0,796,641,*</item>
+  <item id="AOs::blinky::SM">-237,0,796,641</item>
   <item id=".::Cores_Project::CPU1::state_machine::qm_files::ao_blinky::blinky.c">0,0,668,981</item>
   <item id=".::Cores_Project::CPU1::state_machine::qm_files::main_qm.h">-37,359,596,300</item>
-  <item id=".::Cores_Project::CPU1::state_machine::qm_files::main_qm.c">-37,0,596,300</item>
+  <item id=".::Cores_Project::CPU1::state_machine::qm_files::main_qm.c">0,0,796,641,*</item>
   <item id=".::Cores_Project::CPU1::state_machine::qm_files::ao_blinky::blinky.h">0,300,596,300</item>
   <item id=".::Cores_Project::CPU1::state_machine::qm_files::signals.h">0,0,596,300</item>
  </group>
