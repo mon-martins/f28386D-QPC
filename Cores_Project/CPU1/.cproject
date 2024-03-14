@@ -57,7 +57,7 @@
 									<listOptionValue builtIn="false" value="${SUBMODULES_LOC}/qpc/ports/freertos"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/bsp/qpc/freertos_support/include"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/bsp/qpc/qpc_support/include"/>
-									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/application/ao_sup"/>
+									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/application/active_objects"/>
 									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/state_machine/qm_files"/>
 								</option>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ADVICE__PERFORMANCE.1102679977" name="Provide advice on optimization techniques (--advice:performance)" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ADVICE__PERFORMANCE" value="--advice:performance=all" valueType="string"/>
@@ -123,8 +123,6 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry excluding="middleware/qpc/ports/risc-v|middleware/qpc/src/qv|middleware/qpc/ports/qube|middleware/qpc/ports/qep-only|middleware/qpc/ports/win32-qv|middleware/qpc/src/qf/qf_actq.c|middleware/qpc/ports/pic32|middleware/qpc/src/qxk|middleware/qpc/3rd_party|middleware/qpc/src/qs|middleware/qpc/src/qk|middleware/qpc/LICENSES|middleware/qpc/ports/posix-qutest|middleware/qpc/ports/win32|middleware/qpc/test|middleware/qpc/ports/posix|middleware/qpc/ports/config|middleware/qpc/ports/win32-qutest|middleware/qpc/ports/arm-cm|middleware/qpc/zephyr|middleware/qpc/ports/embos|middleware/qpc/ports/posix-qv|middleware/qpc/ports/lint-plus|middleware/qpc/ports/threadx|middleware/qpc/ports/arm-cr|middleware/qpc/ports/zephyr|middleware/qpc/ports/esp-idf|middleware/qpc/ports/uc-os2|middleware/driverlib|middleware/qpc/examples|middleware/qpc/ports/msp430" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="middleware/driverlib/inc"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="middleware/driverlib/ccs"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
