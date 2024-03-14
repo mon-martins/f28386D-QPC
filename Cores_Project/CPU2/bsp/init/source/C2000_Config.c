@@ -27,5 +27,9 @@ void C2000_Init(void){
 
     C2000Ware_libraries_init();
 
+    IPC_clearFlagLtoR(IPC_CPU2_L_CPU1_R, IPC_FLAG_ALL);
     IPC_sync(IPC_CPU2_L_CPU1_R, IPC_SYNC);
+
+    IPC_clearFlagLtoR(IPC_CPU2_L_CM_R, IPC_FLAG_ALL);
+    IPC_sync(IPC_CPU2_L_CM_R, IPC_SYNC);
 }
