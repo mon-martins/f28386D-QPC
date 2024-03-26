@@ -7,10 +7,11 @@ In this project each Core blinky it's own LED.
 ## Getting Started
 
 ## Tools:
-QM: 6.1.1
-QPC framework: 7.3.3
-SDK: C2000WARE 05.00.00.00
-SYSCONFIG: V1.19.0
+
+- QM: 6.1.1
+- QPC framework: 7.3.3
+- SDK: C2000WARE 05.00.00.00
+- SYSCONFIG: V1.19.0
 
 ### Importing
 
