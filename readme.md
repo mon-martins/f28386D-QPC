@@ -6,6 +6,12 @@ In this project each Core blinky it's own LED.
 
 ## Getting Started
 
+## Tools:
+QM: 6.1.1
+QPC framework: 7.3.3
+SDK: C2000WARE 05.00.00.00
+SYSCONFIG: V1.19.0
+
 ### Importing
 
 To import this project import the System Project, on root. and remember to check the "Import referenced projects in the same search-directory" box.
@@ -13,14 +19,6 @@ To import this project import the System Project, on root. and remember to check
 ### Running
 
 To debug all projects run with the System Project selected.
-
-### Notes
-
-To run this program with Overflow Checking with the second method, it's necessary to change two files in the sdk directory,
-to do so just copy and paste the folder C2000Ware_5_00_00_00 inside "Other_Files/Custom" into C2000 directory as sugested in [this topic](https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/1340754/tms320f28386d-sysconfig-freertosconfig-stack_overflow/5109670#5109670),
-in order to use the original SDK you can do the same using the "Other_Files/Original" Folder. (it will be fixed in the future)
-
-After change this two files you can open the ".syscfg" file, and select the check for stack overflow option on the FreeRTOS tab.
 
 ### Command File
 
@@ -36,9 +34,16 @@ set or delete the _FLASH symbol on Prject's proprieties.
 
 - Change the pre-build step of the CM replacing Debug to your new Build Configuration Name
 
+### Notes
 
-## Tools:
-QM: 6.1.1
-QPC framework: 7.3.3
-SDK: C2000WARE 05.00.00.00
-SYSCONFIG: V1.19.0
+- Using configCHECK_FOR_STACK_OVERFLOW: (recommended to use 2)
+
+To run this program with Overflow Checking with the second method, it's necessary to change two files in the sdk directory,
+to do so just copy and paste the folder C2000Ware_5_00_00_00 inside "Other_Files/Custom" into C2000 directory as sugested in [this topic](https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/1340754/tms320f28386d-sysconfig-freertosconfig-stack_overflow/5109670#5109670),
+in order to use the original SDK you can do the same using the "Other_Files/Original" Folder. (it will be fixed in the future)
+
+After change this two files you can open the ".syscfg" file, and select the check for stack overflow option on the FreeRTOS tab.
+
+- Stack Usage:
+
+When using a RTOS, it's recommended to use the "Stack Usage View" to make sure that all functions called will fit on the space reserved in each Task or Active Object, remember consider to use short sized stack on ISRs because any ISR use the current task's stack, then every task will have stack with a empty space to support any ISR, if you are nesting ISRs you have to be more carefull about this space. (see [this topic](https://e2e.ti.com/support/microcontrollers/c2000-microcontrollers-group/c2000/f/c2000-microcontrollers-forum/1319584/tms320f28388d-stack-memory-utilization-by-freertos-tasks))
