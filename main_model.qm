@@ -54,11 +54,7 @@ QTimeEvt_ctorX(&amp;me-&gt;time_evt, &amp;me-&gt;super, TIMEOUT_SIG, 0U);</code>
     <documentation>Blinky state machine</documentation>
     <!--${AOs::blinky::SM::initial}-->
     <initial target="../1">
-     <action>#ifdef CM
-QTimeEvt_armX(&amp;me-&gt;time_evt,500, 500);
-#else
-QTimeEvt_armX(&amp;me-&gt;time_evt,501, 501);
-#endif</action>
+     <action>QTimeEvt_armX(&amp;me-&gt;time_evt,500, 500);</action>
      <initial_glyph conn="2,3,5,1,20,4,-4">
       <action box="0,-2,6,2"/>
      </initial_glyph>
@@ -121,21 +117,19 @@ QTimeEvt_armX(&amp;me-&gt;time_evt,501, 501);
   <directory name="Cores_Project">
    <!--${.::Cores_Project::CPU1}-->
    <directory name="CPU1">
-    <!--${.::Cores_Project::CPU1::state_machine}-->
-    <directory name="state_machine">
-     <!--${.::Cores_Project::CPU1::state_machine::qm_files}-->
-     <directory name="qm_files">
-      <!--${.::Cores_Project::CPU1::state_machine::qm_files::ao_blinky}-->
-      <directory name="ao_blinky">
-       <!--${.::Cores_Project::CPU1::state_machine::qm_files::ao_blinky::blinky.c}-->
-       <file name="blinky.c">
-        <text>#include &quot;./blinky.h&quot;
+    <!--${.::Cores_Project::CPU1::qm_files}-->
+    <directory name="qm_files">
+     <!--${.::Cores_Project::CPU1::qm_files::ao_blinky}-->
+     <directory name="ao_blinky">
+      <!--${.::Cores_Project::CPU1::qm_files::ao_blinky::blinky.c}-->
+      <file name="blinky.c">
+       <text>#include &quot;./blinky.h&quot;
 
 $define${AOs::blinky}</text>
-       </file>
-       <!--${.::Cores_Project::CPU1::state_machine::qm_files::ao_blinky::blinky.h}-->
-       <file name="blinky.h">
-        <text>#ifndef BLINKY_H_
+      </file>
+      <!--${.::Cores_Project::CPU1::qm_files::ao_blinky::blinky.h}-->
+      <file name="blinky.h">
+       <text>#ifndef BLINKY_H_
 #define BLINKY_H_
 
 #include &quot;qpc.h&quot;
@@ -145,11 +139,11 @@ $define${AOs::blinky}</text>
 $declare${AOs::blinky}
 
 #endif // BLINKY_H_</text>
-       </file>
-      </directory>
-      <!--${.::Cores_Project::CPU1::state_machine::qm_files::main_qm.h}-->
-      <file name="main_qm.h">
-       <text>#ifndef MAIN_QM_H_
+      </file>
+     </directory>
+     <!--${.::Cores_Project::CPU1::qm_files::main_qm.h}-->
+     <file name="main_qm.h">
+      <text>#ifndef MAIN_QM_H_
 #define MAIN_QM_H_
 
 #include &quot;signals.h&quot;
@@ -161,16 +155,16 @@ $declare${AOs::blinky}
 $declare${Shared}
 
 #endif // MAIN_QM_H_</text>
-      </file>
-      <!--${.::Cores_Project::CPU1::state_machine::qm_files::main_qm.c}-->
-      <file name="main_qm.c">
-       <text>#include &quot;main_qm.h&quot;
+     </file>
+     <!--${.::Cores_Project::CPU1::qm_files::main_qm.c}-->
+     <file name="main_qm.c">
+      <text>#include &quot;main_qm.h&quot;
 
 $define${Shared}</text>
-      </file>
-      <!--${.::Cores_Project::CPU1::state_machine::qm_files::signals.h}-->
-      <file name="signals.h">
-       <text>#ifndef SIGNALS_H_
+     </file>
+     <!--${.::Cores_Project::CPU1::qm_files::signals.h}-->
+     <file name="signals.h">
+      <text>#ifndef SIGNALS_H_
 #define SIGNALS_H_
 
 #include &quot;qpc.h&quot;
@@ -178,29 +172,24 @@ $define${Shared}</text>
 $declare${Signals}
 
 #endif // SIGNALS_H_</text>
-      </file>
-     </directory>
-     <!--${.::Cores_Project::CPU1::state_machine::qm_packages}-->
-     <directory name="qm_packages"/>
+     </file>
     </directory>
    </directory>
    <!--${.::Cores_Project::CPU2}-->
    <directory name="CPU2">
-    <!--${.::Cores_Project::CPU2::state_machine}-->
-    <directory name="state_machine">
-     <!--${.::Cores_Project::CPU2::state_machine::qm_files}-->
-     <directory name="qm_files">
-      <!--${.::Cores_Project::CPU2::state_machine::qm_files::ao_blinky}-->
-      <directory name="ao_blinky">
-       <!--${.::Cores_Project::CPU2::state_machine::qm_files::ao_blinky::blinky.c}-->
-       <file name="blinky.c">
-        <text>#include &quot;./blinky.h&quot;
+    <!--${.::Cores_Project::CPU2::qm_files}-->
+    <directory name="qm_files">
+     <!--${.::Cores_Project::CPU2::qm_files::ao_blinky}-->
+     <directory name="ao_blinky">
+      <!--${.::Cores_Project::CPU2::qm_files::ao_blinky::blinky.c}-->
+      <file name="blinky.c">
+       <text>#include &quot;./blinky.h&quot;
 
 $define${AOs::blinky}</text>
-       </file>
-       <!--${.::Cores_Project::CPU2::state_machine::qm_files::ao_blinky::blinky.h}-->
-       <file name="blinky.h">
-        <text>#ifndef BLINKY_H_
+      </file>
+      <!--${.::Cores_Project::CPU2::qm_files::ao_blinky::blinky.h}-->
+      <file name="blinky.h">
+       <text>#ifndef BLINKY_H_
 #define BLINKY_H_
 
 #include &quot;qpc.h&quot;
@@ -210,11 +199,11 @@ $define${AOs::blinky}</text>
 $declare${AOs::blinky}
 
 #endif // BLINKY_H_</text>
-       </file>
-      </directory>
-      <!--${.::Cores_Project::CPU2::state_machine::qm_files::main_qm.h}-->
-      <file name="main_qm.h">
-       <text>#ifndef MAIN_QM_H_
+      </file>
+     </directory>
+     <!--${.::Cores_Project::CPU2::qm_files::main_qm.h}-->
+     <file name="main_qm.h">
+      <text>#ifndef MAIN_QM_H_
 #define MAIN_QM_H_
 
 #include &quot;signals.h&quot;
@@ -226,16 +215,16 @@ $declare${AOs::blinky}
 $declare${Shared}
 
 #endif // MAIN_QM_H_</text>
-      </file>
-      <!--${.::Cores_Project::CPU2::state_machine::qm_files::main_qm.c}-->
-      <file name="main_qm.c">
-       <text>#include &quot;main_qm.h&quot;
+     </file>
+     <!--${.::Cores_Project::CPU2::qm_files::main_qm.c}-->
+     <file name="main_qm.c">
+      <text>#include &quot;main_qm.h&quot;
 
 $define${Shared}</text>
-      </file>
-      <!--${.::Cores_Project::CPU2::state_machine::qm_files::signals.h}-->
-      <file name="signals.h">
-       <text>#ifndef SIGNALS_H_
+     </file>
+     <!--${.::Cores_Project::CPU2::qm_files::signals.h}-->
+     <file name="signals.h">
+      <text>#ifndef SIGNALS_H_
 #define SIGNALS_H_
 
 #include &quot;qpc.h&quot;
@@ -243,29 +232,24 @@ $define${Shared}</text>
 $declare${Signals}
 
 #endif // SIGNALS_H_</text>
-      </file>
-     </directory>
-     <!--${.::Cores_Project::CPU2::state_machine::qm_packages}-->
-     <directory name="qm_packages"/>
+     </file>
     </directory>
    </directory>
    <!--${.::Cores_Project::CM}-->
    <directory name="CM">
-    <!--${.::Cores_Project::CM::state_machine}-->
-    <directory name="state_machine">
-     <!--${.::Cores_Project::CM::state_machine::qm_files}-->
-     <directory name="qm_files">
-      <!--${.::Cores_Project::CM::state_machine::qm_files::ao_blinky}-->
-      <directory name="ao_blinky">
-       <!--${.::Cores_Project::CM::state_machine::qm_files::ao_blinky::blinky.c}-->
-       <file name="blinky.c">
-        <text>#include &quot;./blinky.h&quot;
+    <!--${.::Cores_Project::CM::qm_files}-->
+    <directory name="qm_files">
+     <!--${.::Cores_Project::CM::qm_files::ao_blinky}-->
+     <directory name="ao_blinky">
+      <!--${.::Cores_Project::CM::qm_files::ao_blinky::blinky.c}-->
+      <file name="blinky.c">
+       <text>#include &quot;./blinky.h&quot;
 
 $define${AOs::blinky}</text>
-       </file>
-       <!--${.::Cores_Project::CM::state_machine::qm_files::ao_blinky::blinky.h}-->
-       <file name="blinky.h">
-        <text>#ifndef BLINKY_H_
+      </file>
+      <!--${.::Cores_Project::CM::qm_files::ao_blinky::blinky.h}-->
+      <file name="blinky.h">
+       <text>#ifndef BLINKY_H_
 #define BLINKY_H_
 
 #include &quot;qpc.h&quot;
@@ -275,11 +259,11 @@ $define${AOs::blinky}</text>
 $declare${AOs::blinky}
 
 #endif // BLINKY_H_</text>
-       </file>
-      </directory>
-      <!--${.::Cores_Project::CM::state_machine::qm_files::main_qm.h}-->
-      <file name="main_qm.h">
-       <text>#ifndef MAIN_QM_H_
+      </file>
+     </directory>
+     <!--${.::Cores_Project::CM::qm_files::main_qm.h}-->
+     <file name="main_qm.h">
+      <text>#ifndef MAIN_QM_H_
 #define MAIN_QM_H_
 
 #include &quot;signals.h&quot;
@@ -291,16 +275,16 @@ $declare${AOs::blinky}
 $declare${Shared}
 
 #endif // MAIN_QM_H_</text>
-      </file>
-      <!--${.::Cores_Project::CM::state_machine::qm_files::main_qm.c}-->
-      <file name="main_qm.c">
-       <text>#include &quot;main_qm.h&quot;
+     </file>
+     <!--${.::Cores_Project::CM::qm_files::main_qm.c}-->
+     <file name="main_qm.c">
+      <text>#include &quot;main_qm.h&quot;
 
 $define${Shared}</text>
-      </file>
-      <!--${.::Cores_Project::CM::state_machine::qm_files::signals.h}-->
-      <file name="signals.h">
-       <text>#ifndef SIGNALS_H_
+     </file>
+     <!--${.::Cores_Project::CM::qm_files::signals.h}-->
+     <file name="signals.h">
+      <text>#ifndef SIGNALS_H_
 #define SIGNALS_H_
 
 #include &quot;qpc.h&quot;
@@ -308,10 +292,7 @@ $define${Shared}</text>
 $declare${Signals}
 
 #endif // SIGNALS_H_</text>
-      </file>
-     </directory>
-     <!--${.::Cores_Project::CM::state_machine::qm_packages}-->
-     <directory name="qm_packages"/>
+     </file>
     </directory>
    </directory>
   </directory>
