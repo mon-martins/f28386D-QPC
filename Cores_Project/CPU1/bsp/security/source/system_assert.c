@@ -17,8 +17,3 @@ void system_assert(const char *filename, int assert_number){
     ESTOP0;
     while(1);
 }
-
-// ASSERT LIST
-// assert_source: 1 - FreeRTOS
-//
-// assert_number: 1 - StackOverflow
