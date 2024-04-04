@@ -10,7 +10,6 @@
 
 #include "C2000_Config.h"
 #include "main_qm.h"
-#include "qpc.h"
 
 //
 // Application Function Prototypes(avoid to use this section)

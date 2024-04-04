@@ -39,12 +39,12 @@
 
 //$define${AOs::blinky} vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
-//${AOs::blinky} .............................................................
+//${AOs::blinky::blinky} .....................................................
 blinky blinky_inst;
 
-//${AOs::blinky::SM} .........................................................
+//${AOs::blinky::blinky::SM} .................................................
 QState blinky_initial(blinky * const me, void const * const par) {
-    //${AOs::blinky::SM::initial}
+    //${AOs::blinky::blinky::SM::initial}
     QTimeEvt_armX(&me->time_evt,500, 500);
 
     QS_FUN_DICTIONARY(&blinky_off);
@@ -53,17 +53,17 @@ QState blinky_initial(blinky * const me, void const * const par) {
     return Q_TRAN(&blinky_off);
 }
 
-//${AOs::blinky::SM::off} ....................................................
+//${AOs::blinky::blinky::SM::off} ............................................
 QState blinky_off(blinky * const me, QEvt const * const e) {
     QState status_;
     switch (e->sig) {
-        //${AOs::blinky::SM::off}
+        //${AOs::blinky::blinky::SM::off}
         case Q_ENTRY_SIG: {
             blinky_led_off();
             status_ = Q_HANDLED();
             break;
         }
-        //${AOs::blinky::SM::off::TIMEOUT}
+        //${AOs::blinky::blinky::SM::off::TIMEOUT}
         case TIMEOUT_SIG: {
             status_ = Q_TRAN(&blinky_on);
             break;
@@ -76,17 +76,17 @@ QState blinky_off(blinky * const me, QEvt const * const e) {
     return status_;
 }
 
-//${AOs::blinky::SM::on} .....................................................
+//${AOs::blinky::blinky::SM::on} .............................................
 QState blinky_on(blinky * const me, QEvt const * const e) {
     QState status_;
     switch (e->sig) {
-        //${AOs::blinky::SM::on}
+        //${AOs::blinky::blinky::SM::on}
         case Q_ENTRY_SIG: {
             blinky_led_on();
             status_ = Q_HANDLED();
             break;
         }
-        //${AOs::blinky::SM::on::TIMEOUT}
+        //${AOs::blinky::blinky::SM::on::TIMEOUT}
         case TIMEOUT_SIG: {
             status_ = Q_TRAN(&blinky_off);
             break;
@@ -97,5 +97,15 @@ QState blinky_on(blinky * const me, QEvt const * const e) {
         }
     }
     return status_;
+}
+
+//${AOs::blinky::globals::ao_blinky} .........................................
+QActive * const ao_blinky = &blinky_inst.super;
+
+//${AOs::blinky::globals::blinky_ctor} .......................................
+void blinky_ctor(const QActive  * const pAO) {
+    blinky * const me = (blinky *) pAO;
+    QActive_ctor(&me->super, Q_STATE_CAST(&blinky_initial));
+    QTimeEvt_ctorX(&me->time_evt, &me->super, TIMEOUT_SIG, 0U);
 }
 //$enddef${AOs::blinky} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

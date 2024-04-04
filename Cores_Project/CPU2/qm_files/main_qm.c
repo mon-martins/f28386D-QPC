@@ -38,14 +38,4 @@
 //$endskip${QP_VERSION} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 //$define${Shared} vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-
-//${Shared::ao_blinky} .......................................................
-QActive * const ao_blinky = &blinky_inst.super;
-
-//${Shared::blinky_ctor} .....................................................
-void blinky_ctor(void) {
-    blinky * const me = &blinky_inst;
-    QActive_ctor(&me->super, Q_STATE_CAST(&blinky_initial));
-    QTimeEvt_ctorX(&me->time_evt, &me->super, TIMEOUT_SIG, 0U);
-}
 //$enddef${Shared} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

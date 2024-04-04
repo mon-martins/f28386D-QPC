@@ -31,19 +31,38 @@
 #ifndef MAIN_QM_H_
 #define MAIN_QM_H_
 
-#include "signals.h"
-
-// include the AOs
-
-#include "ao_blinky/blinky.h"
+#include "qpc.h"
 
 //$declare${Shared} vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
-//${Shared::ao_blinky} .......................................................
+//${Shared::signals} .........................................................
+enum signals {
+    // Publish Subscribe Signals
+    TIMEOUT_SIG = Q_USER_SIG,
+    // - Only PRIVATE
+
+    MAX_PUB_SIG,
+
+    INIT_SINGLE_TARGET_SIG = 32,
+    // - GLOBAL
+
+    // - lOCAL
+
+    // - PRIVATE
+
+    MAX_SIG
+};
+//$enddecl${Shared} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+// Declare opaque pointers and constructors
+
+//$declare${AOs::blinky::globals} vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+//${AOs::blinky::globals::ao_blinky} .........................................
 extern QActive * const ao_blinky;
 
-//${Shared::blinky_ctor} .....................................................
-void blinky_ctor(void);
-//$enddecl${Shared} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//${AOs::blinky::globals::blinky_ctor} .......................................
+void blinky_ctor(const QActive  * const pAO);
+//$enddecl${AOs::blinky::globals} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #endif // MAIN_QM_H_

@@ -37,7 +37,7 @@ void active_objects_init(void){
 
     /* instantiate and start the blinky active object */
 
-    blinky_ctor(); /* in C you must explicitly call the blinky constructor */
+    blinky_ctor(ao_blinky); /* in C you must explicitly call the blinky constructor */
     QACTIVE_START(ao_blinky, /* active object to start */
         1U,                  /* priority of the active object */
         blinky_queue_sto,     /* event queue buffer */

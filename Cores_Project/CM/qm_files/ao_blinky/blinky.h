@@ -31,13 +31,12 @@
 #ifndef BLINKY_H_
 #define BLINKY_H_
 
-#include "qpc.h"
-#include "signals.h"
+#include "main_qm.h"
 #include "blinky_sup/blinky_app.h"
 
 //$declare${AOs::blinky} vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
-//${AOs::blinky} .............................................................
+//${AOs::blinky::blinky} .....................................................
 typedef struct blinky {
 // protected:
     QActive super;
@@ -54,6 +53,12 @@ extern blinky blinky_inst;
 QState blinky_initial(blinky * const me, void const * const par);
 QState blinky_off(blinky * const me, QEvt const * const e);
 QState blinky_on(blinky * const me, QEvt const * const e);
+
+//${AOs::blinky::globals::ao_blinky} .........................................
+extern QActive * const ao_blinky;
+
+//${AOs::blinky::globals::blinky_ctor} .......................................
+void blinky_ctor(const QActive  * const pAO);
 //$enddecl${AOs::blinky} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #endif // BLINKY_H_

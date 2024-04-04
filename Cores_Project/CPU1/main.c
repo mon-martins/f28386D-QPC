@@ -2,6 +2,8 @@
  * main.c
  */
 
+
+#include "FreeRTOS.h"
 #include "application.h"
 
 void main(void)
