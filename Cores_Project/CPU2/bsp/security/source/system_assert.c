@@ -9,7 +9,7 @@
 #include "resources_config.h"
 #include "c2000_freertos.h"
 
-void system_assert(unsigned int assert_source, unsigned int assert_number){
+void system_assert(const char *filename, int assert_number){
 #if USER_ASSERT
     user_assert(assert_source, assert_number);
 #endif

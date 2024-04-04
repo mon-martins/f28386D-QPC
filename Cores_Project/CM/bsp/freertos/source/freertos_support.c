@@ -6,6 +6,7 @@
  */
 
 #include "freertos_support.h"
+#include "system_assert.h"
 
 
 uint8_t ucHeap[ 1024 ];
@@ -61,10 +62,9 @@ void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName )
     // This is a critical erro in your FreeRTOS, this erros musca cause a stop
     // or a reset on your code
 
-    // source: 2 - freertos
     // number: 1 - stack overflow
 
-    system_assert(2,1);
+    system_assert(__FILE__,1);
 }
 
 
@@ -72,8 +72,7 @@ void vApplicationMallocFailedHook(){
     // This is a critical erro in your FreeRTOS, this erros musca cause a stop
     // or a reset on your code
 
-    // source: 2 - freertos
-    // number: 1 - stack overflow
+    // number: 2 - malloc failed
 
-    system_assert(2,2);
+    system_assert(__FILE__,2);
 }

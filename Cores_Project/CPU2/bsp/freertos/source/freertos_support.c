@@ -14,7 +14,7 @@ void vApplicationStackOverflowHook(){
     // source: 2 - freertos
     // number: 1 - stack overflow
 
-    system_assert(2,1);
+    system_assert(__FILE__,1);
 }
 
 void vApplicationMallocFailedHook(){
@@ -24,5 +24,5 @@ void vApplicationMallocFailedHook(){
     // source: 2 - freertos
     // number: 1 - stack overflow
 
-    system_assert(2,2);
+    system_assert(__FILE__,2);
 }
