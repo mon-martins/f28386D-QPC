@@ -32,7 +32,7 @@
 #define BLINKY_H_
 
 #include "main_qm.h"
-#include "blinky_sup/blinky_app.h"
+#include "blinky_app/blinky_app.h"
 
 //$declare${AOs::blinky} vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 

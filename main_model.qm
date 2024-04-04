@@ -139,7 +139,7 @@ $define${AOs::blinky}</text>
 #define BLINKY_H_
 
 #include &quot;main_qm.h&quot;
-#include &quot;blinky_sup/blinky_app.h&quot;
+#include &quot;blinky_app/blinky_app.h&quot;
 
 $declare${AOs::blinky}
 
@@ -187,7 +187,7 @@ $define${AOs::blinky}</text>
 #define BLINKY_H_
 
 #include &quot;main_qm.h&quot;
-#include &quot;blinky_sup/blinky_app.h&quot;
+#include &quot;blinky_app/blinky_app.h&quot;
 
 $declare${AOs::blinky}
 
@@ -235,7 +235,7 @@ $define${AOs::blinky}</text>
 #define BLINKY_H_
 
 #include &quot;main_qm.h&quot;
-#include &quot;blinky_sup/blinky_app.h&quot;
+#include &quot;blinky_app/blinky_app.h&quot;
 
 $declare${AOs::blinky}
 
