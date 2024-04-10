@@ -59,7 +59,7 @@
 	<variableList>
 		<variable>
 			<name>C2000WARE_ROOT</name>
-			<value>$%7BCOM_TI_C2000WARE_SOFTWARE_PACKAGE_INSTALL_DIR%7D</value>
+			<value>$%7BCOM_TI_C2000WARE_INSTALL_DIR%7D</value>
 		</variable>
 		<variable>
 			<name>CORES_LOC</name>
