@@ -31,6 +31,11 @@
 			<locationURI>PARENT-1-CORES_LOC/main_model.qm</locationURI>
 		</link>
 		<link>
+			<name>libs/CLAmath</name>
+			<type>2</type>
+			<locationURI>$%7BCLAMATH_ROOT%7D/lib</locationURI>
+		</link>
+		<link>
 			<name>middleware/driverlib</name>
 			<type>2</type>
 			<locationURI>C2000WARE_ROOT/driverlib/f2838x/driverlib</locationURI>
@@ -45,6 +50,10 @@
 		<variable>
 			<name>C2000WARE_ROOT</name>
 			<value>$%7BCOM_TI_C2000WARE_INSTALL_DIR%7D</value>
+		</variable>
+		<variable>
+			<name>CLAMATH_ROOT</name>
+			<value>$%7BC2000WARE_ROOT%7D/libraries/math/CLAmath/c28</value>
 		</variable>
 		<variable>
 			<name>CORES_LOC</name>

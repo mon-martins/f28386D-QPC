@@ -23,7 +23,7 @@
     <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROJECT.TMS320F28386D.ccxml.Texas Instruments XDS2xx USB Debug Probe/C28xx_CPU1" value="CPU1"/>
     <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_TARGET_CONFIG" value="${target_config_active_default:CPU1}"/>
     <stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.TMS320F28386D.ccxml.Texas Instruments XDS2xx USB Debug Probe/C28xx_CPU1" value="${build_artifact:CPU1}"/>
-    <stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.TMS320F28386D.ccxml.Texas Instruments XDS2xx USB Debug Probe/CPU1_CLA1" value="C:\Users\ramon.martins\Documents\Codigos\Git\CCS\F28386D_FreeRTOS\Cores_Project\CPU1\Debug\CPU1.out"/>
+    <stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.TMS320F28386D.ccxml.Texas Instruments XDS2xx USB Debug Probe/CPU1_CLA1" value="C:\Users\ramon.martins\Documents\Codigos\Git\CCS\F28386D_QPC\Cores_Project\CPU1\Debug\CPU1.out"/>
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
         <listEntry value="/CPU1"/>
     </listAttribute>

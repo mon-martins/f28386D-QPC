@@ -6,10 +6,12 @@
  */
 
 #include "cla1_config.h"
+#include "CLAmath.h"
 
 __interrupt void Cla1Task1 ( void )
 {
     __mdebugstop();
+
 }
 
 __interrupt void Cla1Task2 ( void )
