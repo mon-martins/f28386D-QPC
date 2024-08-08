@@ -17,9 +17,13 @@ void CortexM_Init(void){
 
     //sync
     IPC_clearFlagLtoR(IPC_CM_L_CPU1_R, IPC_FLAG_ALL);
-    IPC_sync(IPC_CM_L_CPU1_R, IPC_SYNC);
+    IPC_sync(IPC_CM_L_CPU1_R, IPC_SYNC_FLAG);
+
+#ifdef DUALCORE
 
     IPC_clearFlagLtoR(IPC_CM_L_CPU2_R, IPC_FLAG_ALL);
     IPC_sync(IPC_CM_L_CPU2_R, IPC_SYNC);
+
+#endif
 
 }

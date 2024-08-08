@@ -15,7 +15,6 @@ const gpio           = scripting.addModule("/driverlib/gpio.js", {}, false);
 const gpio1          = gpio.addInstance();
 const gpio2          = gpio.addInstance();
 const gpio3          = gpio.addInstance();
-const ipc            = scripting.addModule("/driverlib/ipc.js");
 const memcfg         = scripting.addModule("/driverlib/memcfg.js");
 const FREERTOS       = scripting.addModule("/kernel/freertos_tool/FREERTOS", {}, false);
 const FREERTOS1      = FREERTOS.addInstance();
@@ -27,34 +26,22 @@ const CMD1           = CMD.addInstance();
  */
 cla1.$name = "myCLA0";
 
-const multiplier1         = system.clockTree["AUX_IMULT"];
-multiplier1.multiplyValue = 50;
-
-const multiplier2         = system.clockTree["PLL_IMULT"];
-multiplier2.multiplyValue = 40;
-
-const mux18       = system.clockTree["XTAL_OR_X1"];
-mux18.inputSelect = "XTAL";
-
 const pinFunction3     = system.clockTree["XTAL"];
 pinFunction3.XTAL_Freq = 20;
 
 gpio1.$name           = "LED1";
 gpio1.direction       = "GPIO_DIR_MODE_OUT";
-gpio1.gpioPin.$assign = "GPIO8";
+gpio1.gpioPin.$assign = "GPIO94";
 
 gpio2.$name           = "LED2";
 gpio2.direction       = "GPIO_DIR_MODE_OUT";
 gpio2.controllerCore  = "GPIO_CORE_CPU2";
-gpio2.gpioPin.$assign = "GPIO9";
+gpio2.gpioPin.$assign = "GPIO93";
 
 gpio3.$name           = "LED3";
 gpio3.direction       = "GPIO_DIR_MODE_OUT";
 gpio3.controllerCore  = "GPIO_CORE_CM";
-gpio3.gpioPin.$assign = "GPIO99";
-
-ipc.ipcRegisterFlag = ["IPC_FLAG31"];
-ipc.flagHandler31   = "IPC_SYNC";
+gpio3.gpioPin.$assign = "GPIO92";
 
 memcfg.init_MEMCFG_SECT_MSGCPUTOCPU1 = true;
 memcfg.init_MEMCFG_SECT_MSGCPUTOCM0  = true;

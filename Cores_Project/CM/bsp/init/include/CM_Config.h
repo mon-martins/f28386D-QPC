@@ -11,6 +11,7 @@
 #include "cm.h"
 #include "board.h"
 #include "resources_config.h"
+#include "macros_qm.h"
 
 void CortexM_Init(void);
 

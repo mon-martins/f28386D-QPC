@@ -58,17 +58,17 @@ extern "C"
 //
 //*****************************************************************************
 //
-// GPIO8 - GPIO Settings
+// GPIO94 - GPIO Settings
 //
-#define LED1_GPIO_PIN_CONFIG GPIO_8_GPIO8
+#define LED1_GPIO_PIN_CONFIG GPIO_94_GPIO94
 //
-// GPIO9 - GPIO Settings
+// GPIO93 - GPIO Settings
 //
-#define LED2_GPIO_PIN_CONFIG GPIO_9_GPIO9
+#define LED2_GPIO_PIN_CONFIG GPIO_93_GPIO93
 //
-// GPIO99 - GPIO Settings
+// GPIO92 - GPIO Settings
 //
-#define LED3_GPIO_PIN_CONFIG GPIO_99_GPIO99
+#define LED3_GPIO_PIN_CONFIG GPIO_92_GPIO92
 
 //*****************************************************************************
 //
@@ -104,11 +104,11 @@ void myCLA0_init();
 // GPIO Configurations
 //
 //*****************************************************************************
-#define LED1 8
+#define LED1 94
 void LED1_init();
-#define LED2 9
+#define LED2 93
 void LED2_init();
-#define LED3 99
+#define LED3 92
 void LED3_init();
 
 //*****************************************************************************
@@ -163,15 +163,6 @@ extern __interrupt void portTICK_ISR(void);
 
 //*****************************************************************************
 //
-// IPC Configurations
-//
-//*****************************************************************************
-#define IPC_SYNC IPC_FLAG31
-#define IPC_SYNC IPC_FLAG31
-#define BOOT_MODE_CPU2 BOOTMODE_BOOT_TO_FLASH_SECTOR0
-
-//*****************************************************************************
-//
 // MEMCFG Configurations
 //
 //*****************************************************************************
@@ -192,7 +183,6 @@ void	CLA_init();
 void	CPUTIMER_init();
 void	GPIO_init();
 void	INTERRUPT_init();
-void	IPC_SYSCFG_init();
 void	MEMCFG_init();
 void	SYSCTL_init();
 void	PinMux_init();

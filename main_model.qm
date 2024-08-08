@@ -29,94 +29,422 @@ https://www.state-machine.com/qpc/exa.html</documentation>
  <framework name="qpc"/>
  <!--${Shared}-->
  <package name="Shared" stereotype="0x00">
-  <!--${Shared::signals}-->
-  <attribute name="signals" type="enum" visibility="0x04" properties="0x00">
-   <code>{
-    // Publish Subscribe Signals
-    TIMEOUT_SIG = Q_USER_SIG,
-    // - Only PRIVATE
+  <!--${Shared::Signals}-->
+  <package name="Signals" stereotype="0x00"/>
+  <!--${Shared::Types}-->
+  <package name="Types" stereotype="0x00"/>
+  <!--${Shared::Event Types}-->
+  <package name="Event Types" stereotype="0x00"/>
+  <!--${Shared::Macros}-->
+  <package name="Macros" stereotype="0x00">
+   <!--${Shared::Macros::IPC_SYNC_FLAG}-->
+   <attribute name="IPC_SYNC_FLAG" type="" visibility="0x03" properties="0x00">
+    <code>IPC_FLAG31</code>
+   </attribute>
+   <!--${Shared::Macros::IPC_RESET_FLAG}-->
+   <attribute name="IPC_RESET_FLAG" type="" visibility="0x03" properties="0x00">
+    <code>IPC_FLAG3</code>
+   </attribute>
+  </package>
+  <!--${Shared::Event Pools}-->
+  <package name="Event Pools" stereotype="0x00">
+   <!--${Shared::Event Pools::EVT_POOL_1_SIZE}-->
+   <attribute name="EVT_POOL_1_SIZE" type="" visibility="0x03" properties="0x00">
+    <code>8
+</code>
+   </attribute>
+   <!--${Shared::Event Pools::EVT_POOL_2_SIZE}-->
+   <attribute name="EVT_POOL_2_SIZE" type="" visibility="0x03" properties="0x00">
+    <code>8
+</code>
+   </attribute>
+   <!--${Shared::Event Pools::EVT_POOL_3_SIZE}-->
+   <attribute name="EVT_POOL_3_SIZE" type="" visibility="0x03" properties="0x00">
+    <code>8
+</code>
+   </attribute>
+   <!--${Shared::Event Pools::EVT_POOL_4_SIZE}-->
+   <attribute name="EVT_POOL_4_SIZE" type="" visibility="0x03" properties="0x00">
+    <code>8
+</code>
+   </attribute>
+   <!--${Shared::Event Pools::evt_pool_payload_1_t}-->
+   <class name="evt_pool_payload_1_t">
+    <!--${Shared::Event Pools::evt_pool_payload~::data[1]}-->
+    <attribute name="data[1]" type="uint16_t" visibility="0x00" properties="0x00"/>
+   </class>
+   <!--${Shared::Event Pools::evt_pool_payload_2_t}-->
+   <class name="evt_pool_payload_2_t">
+    <!--${Shared::Event Pools::evt_pool_payload~::data[4]}-->
+    <attribute name="data[4]" type="uint16_t" visibility="0x00" properties="0x00"/>
+   </class>
+   <!--${Shared::Event Pools::evt_pool_payload_3_t}-->
+   <class name="evt_pool_payload_3_t">
+    <!--${Shared::Event Pools::evt_pool_payload~::data[8]}-->
+    <attribute name="data[8]" type="uint16_t" visibility="0x00" properties="0x00"/>
+   </class>
+   <!--${Shared::Event Pools::evt_pool_payload_4_t}-->
+   <class name="evt_pool_payload_4_t">
+    <!--${Shared::Event Pools::evt_pool_payload~::data[16]}-->
+    <attribute name="data[16]" type="uint16_t" visibility="0x00" properties="0x00"/>
+   </class>
+   <!--${Shared::Event Pools::EvtPool1_t}-->
+   <class name="EvtPool1_t" superclass="qpc::QEvt">
+    <!--${Shared::Event Pools::EvtPool1_t::payload}-->
+    <attribute name="payload" type="evt_pool_payload_1_t" visibility="0x02" properties="0x00"/>
+   </class>
+   <!--${Shared::Event Pools::EvtPool2_t}-->
+   <class name="EvtPool2_t" superclass="qpc::QEvt">
+    <!--${Shared::Event Pools::EvtPool2_t::payload}-->
+    <attribute name="payload" type="evt_pool_payload_2_t" visibility="0x02" properties="0x00"/>
+   </class>
+   <!--${Shared::Event Pools::EvtPool3_t}-->
+   <class name="EvtPool3_t" superclass="qpc::QEvt">
+    <!--${Shared::Event Pools::EvtPool3_t::payload}-->
+    <attribute name="payload" type="evt_pool_payload_3_t" visibility="0x02" properties="0x00"/>
+   </class>
+   <!--${Shared::Event Pools::EvtPool4_t}-->
+   <class name="EvtPool4_t" superclass="qpc::QEvt">
+    <!--${Shared::Event Pools::EvtPool4_t::payload}-->
+    <attribute name="payload" type="evt_pool_payload_4_t" visibility="0x02" properties="0x00"/>
+   </class>
+  </package>
+ </package>
+ <!--${OCs}-->
+ <package name="OCs" stereotype="0x00">
+  <!--${OCs::Signals}-->
+  <package name="Signals" stereotype="0x00"/>
+ </package>
+ <!--${CPU1}-->
+ <package name="CPU1" stereotype="0x00">
+  <!--${CPU1::AOs}-->
+  <package name="AOs" stereotype="0x02">
+   <!--${CPU1::AOs::AO_BLINKY}-->
+   <package name="AO_BLINKY" stereotype="0x00">
+    <!--${CPU1::AOs::AO_BLINKY::blinky}-->
+    <class name="blinky" superclass="qpc::QActive">
+     <!--${CPU1::AOs::AO_BLINKY::blinky::time_evt}-->
+     <attribute name="time_evt" type="QTimeEvt" visibility="0x02" properties="0x00"/>
+     <!--${CPU1::AOs::AO_BLINKY::blinky::led_on}-->
+     <operation name="led_on" type="void" visibility="0x00" properties="0x00"/>
+     <!--${CPU1::AOs::AO_BLINKY::blinky::led_off}-->
+     <operation name="led_off" type="void" visibility="0x00" properties="0x00"/>
+     <!--${CPU1::AOs::AO_BLINKY::blinky::SM}-->
+     <statechart properties="0x03">
+      <documentation>Blinky state machine</documentation>
+      <!--${CPU1::AOs::AO_BLINKY::blinky::SM::initial}-->
+      <initial target="../1">
+       <action>QTimeEvt_armX(&amp;me-&gt;time_evt,500, 500);</action>
+       <initial_glyph conn="2,3,5,1,20,4,-4">
+        <action box="0,-2,6,2"/>
+       </initial_glyph>
+      </initial>
+      <!--${CPU1::AOs::AO_BLINKY::blinky::SM::off}-->
+      <state name="off">
+       <entry>blinky_led_off(me);</entry>
+       <!--${CPU1::AOs::AO_BLINKY::blinky::SM::off::TIMEOUT}-->
+       <tran trig="TIMEOUT" target="../../2">
+        <tran_glyph conn="2,13,3,1,18,6,-2">
+         <action box="0,-2,8,2"/>
+        </tran_glyph>
+       </tran>
+       <state_glyph node="2,5,16,10">
+        <entry box="1,2,12,4"/>
+       </state_glyph>
+      </state>
+      <!--${CPU1::AOs::AO_BLINKY::blinky::SM::on}-->
+      <state name="on">
+       <entry>blinky_led_on(me);</entry>
+       <!--${CPU1::AOs::AO_BLINKY::blinky::SM::on::TIMEOUT}-->
+       <tran trig="TIMEOUT" target="../../1">
+        <tran_glyph conn="2,25,3,1,20,-15,-4">
+         <action box="0,-2,8,2"/>
+        </tran_glyph>
+       </tran>
+       <state_glyph node="2,17,16,10">
+        <entry box="1,2,12,4"/>
+       </state_glyph>
+      </state>
+      <state_diagram size="24,29"/>
+     </statechart>
+    </class>
+    <!--${CPU1::AOs::AO_BLINKY::inst_ao_blinky}-->
+    <attribute name="inst_ao_blinky" type="blinky" visibility="0x01" properties="0x00"/>
+    <!--${CPU1::AOs::AO_BLINKY::globals}-->
+    <package name="globals" stereotype="0x00">
+     <!--${CPU1::AOs::AO_BLINKY::globals::p_ao_blinky}-->
+     <attribute name="p_ao_blinky" type="QActive * const" visibility="0x00" properties="0x00">
+      <code>= &amp;inst_ao_blinky.super;</code>
+     </attribute>
+     <!--${CPU1::AOs::AO_BLINKY::globals::ao_blinky_ctor}-->
+     <operation name="ao_blinky_ctor" type="void" visibility="0x00" properties="0x00">
+      <!--${CPU1::AOs::AO_BLINKY::globals::ao_blinky_ctor::pAO}-->
+      <parameter name="pAO" type="const QActive  * const"/>
+      <code>// Active Objects
+blinky * const me = (blinky *) pAO;
+QActive_ctor(&amp;me-&gt;super, Q_STATE_CAST(&amp;blinky_initial));
+
+// Time Events
+QTimeEvt_ctorX(&amp;me-&gt;time_evt, &amp;me-&gt;super, TIMEOUT_SIG, 0U);
+
+// Vars</code>
+     </operation>
+    </package>
+   </package>
+  </package>
+  <!--${CPU1::Signals}-->
+  <package name="Signals" stereotype="0x00">
+   <!--${CPU1::Signals::private_signals}-->
+   <attribute name="private_signals" type="enum" visibility="0x04" properties="0x00">
+    <code>{
+// Publish Subscribe Signals
+    FIRST_PUB_SIG = Q_USER_SIG,
 
     MAX_PUB_SIG,
 
-    INIT_SINGLE_TARGET_SIG = 32,
-    // - GLOBAL
+    // Common Signals
+    TIMEOUT_SIG,
 
-    // - lOCAL
-
-    // - PRIVATE
-
-    MAX_SIG
+    MAX_PRIVATE_SIG,
+};</code>
+   </attribute>
+  </package>
+  <!--${CPU1::OC_enum}-->
+  <package name="OC_enum" stereotype="0x00"/>
+  <!--${CPU1::Immutable_Events}-->
+  <package name="Immutable_Events" stereotype="0x00">
+   <!--${CPU1::Immutable_Events::General}-->
+   <package name="General" stereotype="0x00"/>
+  </package>
+  <!--${CPU1::ao_priority}-->
+  <attribute name="ao_priority" type="enum" visibility="0x04" properties="0x00">
+   <code>{
+    // Priority in ascendance order
+    IDLE_TASK=0U,
+    AO_BLINKY_PRIO,
 };</code>
   </attribute>
  </package>
- <!--${AOs}-->
- <package name="AOs" stereotype="0x02">
-  <!--${AOs::blinky}-->
-  <package name="blinky" stereotype="0x00">
-   <!--${AOs::blinky::blinky}-->
-   <class name="blinky" superclass="qpc::QActive">
-    <!--${AOs::blinky::blinky::time_evt}-->
-    <attribute name="time_evt" type="QTimeEvt" visibility="0x02" properties="0x00"/>
-    <!--${AOs::blinky::blinky::inst}-->
-    <attribute name="inst" type="blinky" visibility="0x00" properties="0x01"/>
-    <!--${AOs::blinky::blinky::SM}-->
-    <statechart properties="0x03">
-     <documentation>Blinky state machine</documentation>
-     <!--${AOs::blinky::blinky::SM::initial}-->
-     <initial target="../1">
-      <action>QTimeEvt_armX(&amp;me-&gt;time_evt,500, 500);</action>
-      <initial_glyph conn="2,3,5,1,20,4,-4">
-       <action box="0,-2,6,2"/>
-      </initial_glyph>
-     </initial>
-     <!--${AOs::blinky::blinky::SM::off}-->
-     <state name="off">
-      <entry>blinky_led_off();</entry>
-      <!--${AOs::blinky::blinky::SM::off::TIMEOUT}-->
-      <tran trig="TIMEOUT" target="../../2">
-       <tran_glyph conn="2,13,3,1,18,6,-2">
-        <action box="0,-2,8,2"/>
-       </tran_glyph>
-      </tran>
-      <state_glyph node="2,5,16,10">
-       <entry box="1,2,12,4"/>
-      </state_glyph>
-     </state>
-     <!--${AOs::blinky::blinky::SM::on}-->
-     <state name="on">
-      <entry>blinky_led_on();</entry>
-      <!--${AOs::blinky::blinky::SM::on::TIMEOUT}-->
-      <tran trig="TIMEOUT" target="../../1">
-       <tran_glyph conn="2,25,3,1,20,-15,-4">
-        <action box="0,-2,8,2"/>
-       </tran_glyph>
-      </tran>
-      <state_glyph node="2,17,16,10">
-       <entry box="1,2,12,4"/>
-      </state_glyph>
-     </state>
-     <state_diagram size="24,29"/>
-    </statechart>
-   </class>
-   <!--${AOs::blinky::globals}-->
-   <package name="globals" stereotype="0x00">
-    <!--${AOs::blinky::globals::ao_blinky}-->
-    <attribute name="ao_blinky" type="QActive * const" visibility="0x00" properties="0x00">
-     <code>= &amp;blinky_inst.super;</code>
-    </attribute>
-    <!--${AOs::blinky::globals::blinky_ctor}-->
-    <operation name="blinky_ctor" type="void" visibility="0x00" properties="0x00">
-     <!--${AOs::blinky::globals::blinky_ctor::pAO}-->
-     <parameter name="pAO" type="const QActive  * const"/>
-     <code>blinky * const me = (blinky *) pAO;
+ <!--${CPU2}-->
+ <package name="CPU2" stereotype="0x00">
+  <!--${CPU2::AOs}-->
+  <package name="AOs" stereotype="0x02">
+   <!--${CPU2::AOs::AO_BLINKY}-->
+   <package name="AO_BLINKY" stereotype="0x00">
+    <!--${CPU2::AOs::AO_BLINKY::blinky}-->
+    <class name="blinky" superclass="qpc::QActive">
+     <!--${CPU2::AOs::AO_BLINKY::blinky::time_evt}-->
+     <attribute name="time_evt" type="QTimeEvt" visibility="0x02" properties="0x00"/>
+     <!--${CPU2::AOs::AO_BLINKY::blinky::led_on}-->
+     <operation name="led_on" type="void" visibility="0x00" properties="0x00"/>
+     <!--${CPU2::AOs::AO_BLINKY::blinky::led_off}-->
+     <operation name="led_off" type="void" visibility="0x00" properties="0x00"/>
+     <!--${CPU2::AOs::AO_BLINKY::blinky::SM}-->
+     <statechart properties="0x03">
+      <documentation>Blinky state machine</documentation>
+      <!--${CPU2::AOs::AO_BLINKY::blinky::SM::initial}-->
+      <initial target="../1">
+       <action>QTimeEvt_armX(&amp;me-&gt;time_evt,500, 500);</action>
+       <initial_glyph conn="2,3,5,1,20,4,-4">
+        <action box="0,-2,6,2"/>
+       </initial_glyph>
+      </initial>
+      <!--${CPU2::AOs::AO_BLINKY::blinky::SM::off}-->
+      <state name="off">
+       <entry>blinky_led_off(me);</entry>
+       <!--${CPU2::AOs::AO_BLINKY::blinky::SM::off::TIMEOUT}-->
+       <tran trig="TIMEOUT" target="../../2">
+        <tran_glyph conn="2,13,3,1,18,6,-2">
+         <action box="0,-2,8,2"/>
+        </tran_glyph>
+       </tran>
+       <state_glyph node="2,5,16,10">
+        <entry box="1,2,12,4"/>
+       </state_glyph>
+      </state>
+      <!--${CPU2::AOs::AO_BLINKY::blinky::SM::on}-->
+      <state name="on">
+       <entry>blinky_led_on(me);</entry>
+       <!--${CPU2::AOs::AO_BLINKY::blinky::SM::on::TIMEOUT}-->
+       <tran trig="TIMEOUT" target="../../1">
+        <tran_glyph conn="2,25,3,1,20,-15,-4">
+         <action box="0,-2,8,2"/>
+        </tran_glyph>
+       </tran>
+       <state_glyph node="2,17,16,10">
+        <entry box="1,2,12,4"/>
+       </state_glyph>
+      </state>
+      <state_diagram size="24,29"/>
+     </statechart>
+    </class>
+    <!--${CPU2::AOs::AO_BLINKY::inst_ao_blinky}-->
+    <attribute name="inst_ao_blinky" type="blinky" visibility="0x01" properties="0x00"/>
+    <!--${CPU2::AOs::AO_BLINKY::globals}-->
+    <package name="globals" stereotype="0x00">
+     <!--${CPU2::AOs::AO_BLINKY::globals::p_ao_blinky}-->
+     <attribute name="p_ao_blinky" type="QActive * const" visibility="0x00" properties="0x00">
+      <code>= &amp;inst_ao_blinky.super;</code>
+     </attribute>
+     <!--${CPU2::AOs::AO_BLINKY::globals::ao_blinky_ctor}-->
+     <operation name="ao_blinky_ctor" type="void" visibility="0x00" properties="0x00">
+      <!--${CPU2::AOs::AO_BLINKY::globals::ao_blinky_ctor::pAO}-->
+      <parameter name="pAO" type="const QActive  * const"/>
+      <code>// Active Objects
+blinky * const me = (blinky *) pAO;
 QActive_ctor(&amp;me-&gt;super, Q_STATE_CAST(&amp;blinky_initial));
-QTimeEvt_ctorX(&amp;me-&gt;time_evt, &amp;me-&gt;super, TIMEOUT_SIG, 0U);</code>
-    </operation>
+
+// Time Events
+QTimeEvt_ctorX(&amp;me-&gt;time_evt, &amp;me-&gt;super, TIMEOUT_SIG, 0U);
+
+// Vars</code>
+     </operation>
+    </package>
    </package>
   </package>
+  <!--${CPU2::Signals}-->
+  <package name="Signals" stereotype="0x00">
+   <!--${CPU2::Signals::private_signals}-->
+   <attribute name="private_signals" type="enum" visibility="0x04" properties="0x00">
+    <code>{
+// Publish Subscribe Signals
+    FIRST_PUB_SIG = Q_USER_SIG,
+
+    MAX_PUB_SIG,
+
+    // Common Signals
+    TIMEOUT_SIG,
+
+    MAX_PRIVATE_SIG,
+};</code>
+   </attribute>
+  </package>
+  <!--${CPU2::OC_enum}-->
+  <package name="OC_enum" stereotype="0x00"/>
+  <!--${CPU2::Immutable_Events}-->
+  <package name="Immutable_Events" stereotype="0x00">
+   <!--${CPU2::Immutable_Events::General}-->
+   <package name="General" stereotype="0x00"/>
+  </package>
+  <!--${CPU2::ao_priority}-->
+  <attribute name="ao_priority" type="enum" visibility="0x04" properties="0x00">
+   <code>{
+    // Priority in ascendance order
+    IDLE_TASK=0U,
+    AO_BLINKY_PRIO,
+};</code>
+  </attribute>
  </package>
- <!--${Signals}-->
- <package name="Signals" stereotype="0x00"/>
+ <!--${CM}-->
+ <package name="CM" stereotype="0x00">
+  <!--${CM::AOs}-->
+  <package name="AOs" stereotype="0x02">
+   <!--${CM::AOs::AO_BLINKY}-->
+   <package name="AO_BLINKY" stereotype="0x00">
+    <!--${CM::AOs::AO_BLINKY::blinky}-->
+    <class name="blinky" superclass="qpc::QActive">
+     <!--${CM::AOs::AO_BLINKY::blinky::time_evt}-->
+     <attribute name="time_evt" type="QTimeEvt" visibility="0x02" properties="0x00"/>
+     <!--${CM::AOs::AO_BLINKY::blinky::led_on}-->
+     <operation name="led_on" type="void" visibility="0x00" properties="0x00"/>
+     <!--${CM::AOs::AO_BLINKY::blinky::led_off}-->
+     <operation name="led_off" type="void" visibility="0x00" properties="0x00"/>
+     <!--${CM::AOs::AO_BLINKY::blinky::SM}-->
+     <statechart properties="0x03">
+      <documentation>Blinky state machine</documentation>
+      <!--${CM::AOs::AO_BLINKY::blinky::SM::initial}-->
+      <initial target="../1">
+       <action>QTimeEvt_armX(&amp;me-&gt;time_evt,500, 500);</action>
+       <initial_glyph conn="2,3,5,1,20,4,-4">
+        <action box="0,-2,6,2"/>
+       </initial_glyph>
+      </initial>
+      <!--${CM::AOs::AO_BLINKY::blinky::SM::off}-->
+      <state name="off">
+       <entry>blinky_led_off(me);</entry>
+       <!--${CM::AOs::AO_BLINKY::blinky::SM::off::TIMEOUT}-->
+       <tran trig="TIMEOUT" target="../../2">
+        <tran_glyph conn="2,13,3,1,18,6,-2">
+         <action box="0,-2,8,2"/>
+        </tran_glyph>
+       </tran>
+       <state_glyph node="2,5,16,10">
+        <entry box="1,2,12,4"/>
+       </state_glyph>
+      </state>
+      <!--${CM::AOs::AO_BLINKY::blinky::SM::on}-->
+      <state name="on">
+       <entry>blinky_led_on(me);</entry>
+       <!--${CM::AOs::AO_BLINKY::blinky::SM::on::TIMEOUT}-->
+       <tran trig="TIMEOUT" target="../../1">
+        <tran_glyph conn="2,25,3,1,20,-15,-4">
+         <action box="0,-2,8,2"/>
+        </tran_glyph>
+       </tran>
+       <state_glyph node="2,17,16,10">
+        <entry box="1,2,12,4"/>
+       </state_glyph>
+      </state>
+      <state_diagram size="24,29"/>
+     </statechart>
+    </class>
+    <!--${CM::AOs::AO_BLINKY::inst_ao_blinky}-->
+    <attribute name="inst_ao_blinky" type="blinky" visibility="0x01" properties="0x00"/>
+    <!--${CM::AOs::AO_BLINKY::globals}-->
+    <package name="globals" stereotype="0x00">
+     <!--${CM::AOs::AO_BLINKY::globals::p_ao_blinky}-->
+     <attribute name="p_ao_blinky" type="QActive * const" visibility="0x00" properties="0x00">
+      <code>= &amp;inst_ao_blinky.super;</code>
+     </attribute>
+     <!--${CM::AOs::AO_BLINKY::globals::ao_blinky_ctor}-->
+     <operation name="ao_blinky_ctor" type="void" visibility="0x00" properties="0x00">
+      <!--${CM::AOs::AO_BLINKY::globals::ao_blinky_ctor::pAO}-->
+      <parameter name="pAO" type="const QActive  * const"/>
+      <code>// Active Objects
+blinky * const me = (blinky *) pAO;
+QActive_ctor(&amp;me-&gt;super, Q_STATE_CAST(&amp;blinky_initial));
+
+// Time Events
+QTimeEvt_ctorX(&amp;me-&gt;time_evt, &amp;me-&gt;super, TIMEOUT_SIG, 0U);
+
+// Vars</code>
+     </operation>
+    </package>
+   </package>
+  </package>
+  <!--${CM::Signals}-->
+  <package name="Signals" stereotype="0x00">
+   <!--${CM::Signals::private_signals}-->
+   <attribute name="private_signals" type="enum" visibility="0x04" properties="0x00">
+    <code>{
+// Publish Subscribe Signals
+    FIRST_PUB_SIG = Q_USER_SIG,
+
+    MAX_PUB_SIG,
+
+    // Common Signals
+    TIMEOUT_SIG,
+
+    MAX_PRIVATE_SIG,
+};</code>
+   </attribute>
+  </package>
+  <!--${CM::OC_enum}-->
+  <package name="OC_enum" stereotype="0x00"/>
+  <!--${CM::Immutable_Events}-->
+  <package name="Immutable_Events" stereotype="0x00">
+   <!--${CM::Immutable_Events::General}-->
+   <package name="General" stereotype="0x00"/>
+  </package>
+  <!--${CM::ao_priority}-->
+  <attribute name="ao_priority" type="enum" visibility="0x04" properties="0x00">
+   <code>{
+    // Priority in ascendance order
+    IDLE_TASK=0U,
+    AO_BLINKY_PRIO,
+};</code>
+  </attribute>
+ </package>
  <!--${.}-->
  <directory name=".">
   <!--${.::Cores_Project}-->
@@ -125,26 +453,33 @@ QTimeEvt_ctorX(&amp;me-&gt;time_evt, &amp;me-&gt;super, TIMEOUT_SIG, 0U);</code>
    <directory name="CPU1">
     <!--${.::Cores_Project::CPU1::qm_files}-->
     <directory name="qm_files">
-     <!--${.::Cores_Project::CPU1::qm_files::ao_blinky}-->
-     <directory name="ao_blinky">
-      <!--${.::Cores_Project::CPU1::qm_files::ao_blinky::blinky.c}-->
-      <file name="blinky.c">
-       <text>#include &quot;./blinky.h&quot;
+     <!--${.::Cores_Project::CPU1::qm_files::AOs}-->
+     <directory name="AOs">
+      <!--${.::Cores_Project::CPU1::qm_files::AOs::ao_blinky}-->
+      <directory name="ao_blinky">
+       <!--${.::Cores_Project::CPU1::qm_files::AOs::ao_blinky::blinky.c}-->
+       <file name="blinky.c">
+        <text>#include &quot;./blinky.h&quot;
 
-$define${AOs::blinky}</text>
-      </file>
-      <!--${.::Cores_Project::CPU1::qm_files::ao_blinky::blinky.h}-->
-      <file name="blinky.h">
-       <text>#ifndef BLINKY_H_
+$define${CPU1::AOs::AO_BLINKY}</text>
+       </file>
+       <!--${.::Cores_Project::CPU1::qm_files::AOs::ao_blinky::blinky.h}-->
+       <file name="blinky.h">
+        <text>#ifndef BLINKY_H_
 #define BLINKY_H_
 
 #include &quot;main_qm.h&quot;
-#include &quot;blinky_app/blinky_app.h&quot;
 
-$declare${AOs::blinky}
+// Orthogonal Component
+
+
+// Declare your AO:
+
+$declare${CPU1::AOs::AO_BLINKY}
 
 #endif // BLINKY_H_</text>
-      </file>
+       </file>
+      </directory>
      </directory>
      <!--${.::Cores_Project::CPU1::qm_files::main_qm.h}-->
      <file name="main_qm.h">
@@ -152,12 +487,44 @@ $declare${AOs::blinky}
 #define MAIN_QM_H_
 
 #include &quot;qpc.h&quot;
+#include &quot;bsp_basic.h&quot;
+#include &quot;system_assert.h&quot;
+
+//================================================
+//====================Signals=====================
+//================================================
 
 $declare${Shared}
 
-// Declare opaque pointers and constructors
+$declare${OCs::Signals}
 
-$declare${AOs::blinky::globals}
+$declare${CPU1::Signals}
+
+//================================================
+//===================Priorities===================
+//================================================
+
+$declare${CPU1::ao_priority}
+
+//================================================
+//=================Active-Objects=================
+//================================================
+
+// AO_Example
+$declare${CPU1::AOs::AO_BLINKY::globals}
+
+
+//================================================
+//=============Orthogonal-Components==============
+//================================================
+
+$declare${CPU1::OC_enum}
+
+//================================================
+//================Immutable-Events================
+//================================================
+
+$declare${CPU1::Immutable_Events}
 
 #endif // MAIN_QM_H_</text>
      </file>
@@ -165,7 +532,15 @@ $declare${AOs::blinky::globals}
      <file name="main_qm.c">
       <text>#include &quot;main_qm.h&quot;
 
-$define${Shared}</text>
+$define${Shared}
+
+$define${CPU1::Immutable_Events}
+
+$define${CPU1::Signals}</text>
+     </file>
+     <!--${.::Cores_Project::CPU1::qm_files::macros_qm.h}-->
+     <file name="macros_qm.h">
+      <text>$declare${Shared::Macros}</text>
      </file>
     </directory>
    </directory>
@@ -173,26 +548,33 @@ $define${Shared}</text>
    <directory name="CPU2">
     <!--${.::Cores_Project::CPU2::qm_files}-->
     <directory name="qm_files">
-     <!--${.::Cores_Project::CPU2::qm_files::ao_blinky}-->
-     <directory name="ao_blinky">
-      <!--${.::Cores_Project::CPU2::qm_files::ao_blinky::blinky.c}-->
-      <file name="blinky.c">
-       <text>#include &quot;./blinky.h&quot;
+     <!--${.::Cores_Project::CPU2::qm_files::AOs}-->
+     <directory name="AOs">
+      <!--${.::Cores_Project::CPU2::qm_files::AOs::ao_blinky}-->
+      <directory name="ao_blinky">
+       <!--${.::Cores_Project::CPU2::qm_files::AOs::ao_blinky::blinky.c}-->
+       <file name="blinky.c">
+        <text>#include &quot;./blinky.h&quot;
 
-$define${AOs::blinky}</text>
-      </file>
-      <!--${.::Cores_Project::CPU2::qm_files::ao_blinky::blinky.h}-->
-      <file name="blinky.h">
-       <text>#ifndef BLINKY_H_
+$define${CPU2::AOs::AO_BLINKY}</text>
+       </file>
+       <!--${.::Cores_Project::CPU2::qm_files::AOs::ao_blinky::blinky.h}-->
+       <file name="blinky.h">
+        <text>#ifndef BLINKY_H_
 #define BLINKY_H_
 
 #include &quot;main_qm.h&quot;
-#include &quot;blinky_app/blinky_app.h&quot;
 
-$declare${AOs::blinky}
+// Orthogonal Component
+
+
+// Declare your AO:
+
+$declare${CPU2::AOs::AO_BLINKY}
 
 #endif // BLINKY_H_</text>
-      </file>
+       </file>
+      </directory>
      </directory>
      <!--${.::Cores_Project::CPU2::qm_files::main_qm.h}-->
      <file name="main_qm.h">
@@ -200,12 +582,44 @@ $declare${AOs::blinky}
 #define MAIN_QM_H_
 
 #include &quot;qpc.h&quot;
+#include &quot;bsp_basic.h&quot;
+#include &quot;system_assert.h&quot;
+
+//================================================
+//====================Signals=====================
+//================================================
 
 $declare${Shared}
 
-// Declare opaque pointers and constructors
+$declare${OCs::Signals}
 
-$declare${AOs::blinky::globals}
+$declare${CPU2::Signals}
+
+//================================================
+//===================Priorities===================
+//================================================
+
+$declare${CPU2::ao_priority}
+
+//================================================
+//=================Active-Objects=================
+//================================================
+
+// AO_Example
+$declare${CPU2::AOs::AO_BLINKY::globals}
+
+
+//================================================
+//=============Orthogonal-Components==============
+//================================================
+
+$declare${CPU2::OC_enum}
+
+//================================================
+//================Immutable-Events================
+//================================================
+
+$declare${CPU2::Immutable_Events}
 
 #endif // MAIN_QM_H_</text>
      </file>
@@ -213,7 +627,15 @@ $declare${AOs::blinky::globals}
      <file name="main_qm.c">
       <text>#include &quot;main_qm.h&quot;
 
-$define${Shared}</text>
+$define${Shared}
+
+$define${CPU2::Immutable_Events}
+
+$define${CPU2::Signals}</text>
+     </file>
+     <!--${.::Cores_Project::CPU2::qm_files::macros_qm.h}-->
+     <file name="macros_qm.h">
+      <text>$declare${Shared::Macros}</text>
      </file>
     </directory>
    </directory>
@@ -221,26 +643,33 @@ $define${Shared}</text>
    <directory name="CM">
     <!--${.::Cores_Project::CM::qm_files}-->
     <directory name="qm_files">
-     <!--${.::Cores_Project::CM::qm_files::ao_blinky}-->
-     <directory name="ao_blinky">
-      <!--${.::Cores_Project::CM::qm_files::ao_blinky::blinky.c}-->
-      <file name="blinky.c">
-       <text>#include &quot;./blinky.h&quot;
+     <!--${.::Cores_Project::CM::qm_files::AOs}-->
+     <directory name="AOs">
+      <!--${.::Cores_Project::CM::qm_files::AOs::ao_blinky}-->
+      <directory name="ao_blinky">
+       <!--${.::Cores_Project::CM::qm_files::AOs::ao_blinky::blinky.c}-->
+       <file name="blinky.c">
+        <text>#include &quot;./blinky.h&quot;
 
-$define${AOs::blinky}</text>
-      </file>
-      <!--${.::Cores_Project::CM::qm_files::ao_blinky::blinky.h}-->
-      <file name="blinky.h">
-       <text>#ifndef BLINKY_H_
+$define${CM::AOs::AO_BLINKY}</text>
+       </file>
+       <!--${.::Cores_Project::CM::qm_files::AOs::ao_blinky::blinky.h}-->
+       <file name="blinky.h">
+        <text>#ifndef BLINKY_H_
 #define BLINKY_H_
 
 #include &quot;main_qm.h&quot;
-#include &quot;blinky_app/blinky_app.h&quot;
 
-$declare${AOs::blinky}
+// Orthogonal Component
+
+
+// Declare your AO:
+
+$declare${CM::AOs::AO_BLINKY}
 
 #endif // BLINKY_H_</text>
-      </file>
+       </file>
+      </directory>
      </directory>
      <!--${.::Cores_Project::CM::qm_files::main_qm.h}-->
      <file name="main_qm.h">
@@ -248,12 +677,44 @@ $declare${AOs::blinky}
 #define MAIN_QM_H_
 
 #include &quot;qpc.h&quot;
+#include &quot;bsp_basic.h&quot;
+#include &quot;system_assert.h&quot;
+
+//================================================
+//====================Signals=====================
+//================================================
 
 $declare${Shared}
 
-// Declare opaque pointers and constructors
+$declare${OCs::Signals}
 
-$declare${AOs::blinky::globals}
+$declare${CM::Signals}
+
+//================================================
+//===================Priorities===================
+//================================================
+
+$declare${CM::ao_priority}
+
+//================================================
+//=================Active-Objects=================
+//================================================
+
+// AO_Example
+$declare${CM::AOs::AO_BLINKY::globals}
+
+
+//================================================
+//=============Orthogonal-Components==============
+//================================================
+
+$declare${CM::OC_enum}
+
+//================================================
+//================Immutable-Events================
+//================================================
+
+$declare${CM::Immutable_Events}
 
 #endif // MAIN_QM_H_</text>
      </file>
@@ -261,7 +722,15 @@ $declare${AOs::blinky::globals}
      <file name="main_qm.c">
       <text>#include &quot;main_qm.h&quot;
 
-$define${Shared}</text>
+$define${Shared}
+
+$define${CPU1::Immutable_Events}
+
+$define${CPU1::Signals}</text>
+     </file>
+     <!--${.::Cores_Project::CM::qm_files::macros_qm.h}-->
+     <file name="macros_qm.h">
+      <text>$declare${Shared::Macros}</text>
      </file>
     </directory>
    </directory>

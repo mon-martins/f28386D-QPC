@@ -32,37 +32,158 @@
 #define MAIN_QM_H_
 
 #include "qpc.h"
+#include "bsp_basic.h"
+#include "system_assert.h"
+
+//================================================
+//====================Signals=====================
+//================================================
 
 //$declare${Shared} vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
-//${Shared::signals} .........................................................
-enum signals {
-    // Publish Subscribe Signals
-    TIMEOUT_SIG = Q_USER_SIG,
-    // - Only PRIVATE
+//${Shared::Macros::IPC_SYNC_FLAG} ...........................................
+#define IPC_SYNC_FLAG IPC_FLAG31
+
+//${Shared::Macros::IPC_RESET_FLAG} ..........................................
+#define IPC_RESET_FLAG IPC_FLAG3
+
+//${Shared::Event Pools::EVT_POOL_1_SIZE} ....................................
+#define EVT_POOL_1_SIZE 8
+
+
+//${Shared::Event Pools::EVT_POOL_2_SIZE} ....................................
+#define EVT_POOL_2_SIZE 8
+
+
+//${Shared::Event Pools::EVT_POOL_3_SIZE} ....................................
+#define EVT_POOL_3_SIZE 8
+
+
+//${Shared::Event Pools::EVT_POOL_4_SIZE} ....................................
+#define EVT_POOL_4_SIZE 8
+
+
+//${Shared::Event Pools::evt_pool_payload_1_t} ...............................
+typedef struct {
+// public:
+    uint16_t data[1];
+} evt_pool_payload_1_t;
+
+//${Shared::Event Pools::evt_pool_payload_2_t} ...............................
+typedef struct {
+// public:
+    uint16_t data[4];
+} evt_pool_payload_2_t;
+
+//${Shared::Event Pools::evt_pool_payload_3_t} ...............................
+typedef struct {
+// public:
+    uint16_t data[8];
+} evt_pool_payload_3_t;
+
+//${Shared::Event Pools::evt_pool_payload_4_t} ...............................
+typedef struct {
+// public:
+    uint16_t data[16];
+} evt_pool_payload_4_t;
+
+//${Shared::Event Pools::EvtPool1_t} .........................................
+typedef struct {
+// protected:
+    QEvt super;
+
+// private:
+    evt_pool_payload_1_t payload;
+} EvtPool1_t;
+
+//${Shared::Event Pools::EvtPool2_t} .........................................
+typedef struct {
+// protected:
+    QEvt super;
+
+// private:
+    evt_pool_payload_2_t payload;
+} EvtPool2_t;
+
+//${Shared::Event Pools::EvtPool3_t} .........................................
+typedef struct {
+// protected:
+    QEvt super;
+
+// private:
+    evt_pool_payload_3_t payload;
+} EvtPool3_t;
+
+//${Shared::Event Pools::EvtPool4_t} .........................................
+typedef struct {
+// protected:
+    QEvt super;
+
+// private:
+    evt_pool_payload_4_t payload;
+} EvtPool4_t;
+//$enddecl${Shared} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+//$declare${OCs::Signals} vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+//$enddecl${OCs::Signals} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+//$declare${CM::Signals} vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+//${CM::Signals::private_signals} ............................................
+enum private_signals {
+// Publish Subscribe Signals
+    FIRST_PUB_SIG = Q_USER_SIG,
 
     MAX_PUB_SIG,
 
-    INIT_SINGLE_TARGET_SIG = 32,
-    // - GLOBAL
+    // Common Signals
+    TIMEOUT_SIG,
 
-    // - lOCAL
-
-    // - PRIVATE
-
-    MAX_SIG
+    MAX_PRIVATE_SIG,
 };
-//$enddecl${Shared} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//$enddecl${CM::Signals} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-// Declare opaque pointers and constructors
+//================================================
+//===================Priorities===================
+//================================================
 
-//$declare${AOs::blinky::globals} vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+//$declare${CM::ao_priority} vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
-//${AOs::blinky::globals::ao_blinky} .........................................
-extern QActive * const ao_blinky;
+//${CM::ao_priority} .........................................................
+enum ao_priority {
+    // Priority in ascendance order
+    IDLE_TASK=0U,
+    AO_BLINKY_PRIO,
+};
+//$enddecl${CM::ao_priority} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-//${AOs::blinky::globals::blinky_ctor} .......................................
-void blinky_ctor(const QActive  * const pAO);
-//$enddecl${AOs::blinky::globals} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//================================================
+//=================Active-Objects=================
+//================================================
+
+// AO_Example
+//$declare${CM::AOs::AO_BLINKY::globals} vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+//${CM::AOs::AO_BLINKY::globals::p_ao_blinky} ................................
+extern QActive * const p_ao_blinky;
+
+//${CM::AOs::AO_BLINKY::globals::ao_blinky_ctor} .............................
+void ao_blinky_ctor(const QActive  * const pAO);
+//$enddecl${CM::AOs::AO_BLINKY::globals} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+//================================================
+//=============Orthogonal-Components==============
+//================================================
+
+//$declare${CM::OC_enum} vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+//$enddecl${CM::OC_enum} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+//================================================
+//================Immutable-Events================
+//================================================
+
+//$declare${CM::Immutable_Events} vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+//$enddecl${CM::Immutable_Events} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #endif // MAIN_QM_H_
